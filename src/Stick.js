@@ -31,17 +31,36 @@ class Stick {
     // }
     // ----- algo two
 
-    var normal = Vector.sub(this.startPoint.pos, this.endPoint.pos);
-    var m = normal.magSq();
-    let diff = ((this.length * this.length) - m);
-    normal.mult((diff / m) * this.stiffness * stepCoef);
+    // algo three
+    let dx = this.endPoint.pos.x - this.startPoint.pos.x;
+    let dy = this.endPoint.pos.y - this.startPoint.pos.y;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    let diff = (this.length - dist) / dist;
+
+    // if (dist > tear_distance) this.p1.remove_constraint(this);
+    var offsetx = dx * diff * 0.5;
+    var offsety = dy * diff * 0.5;
 
     if (!this.startPoint.pinned) {
-      this.startPoint.pos.add(normal);
+      this.startPoint.pos.x -= offsetx;
+      this.startPoint.pos.y -= offsety;
     }
     if (!this.endPoint.pinned) {
-      this.endPoint.pos.sub(normal);
+      this.endPoint.pos.x += offsetx;
+      this.endPoint.pos.y += offsety;
     }
+
+    // var normal = Vector.sub(this.startPoint.pos, this.endPoint.pos);
+    // var m = normal.magSq();
+    // let diff = ((this.length * this.length) - m);
+    // normal.mult((diff / m) * this.stiffness * stepCoef);
+
+    // if (!this.startPoint.pinned) {
+    //   this.startPoint.pos.add(normal);
+    // }
+    // if (!this.endPoint.pinned) {
+    //   this.endPoint.pos.sub(normal);
+    // }
   }
 
   render() {

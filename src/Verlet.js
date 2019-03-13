@@ -8,7 +8,7 @@ class Verlet {
     this.mouse = new Vector();
     canvas.addEventListener('mousedown', () => {
       this.mouseDown = true;
-      this.getNearestPoint();
+      this.draggedPoint = this.getNearestPoint();
       if (this.draggedPoint) {
         this.dragPoint();
       }
@@ -57,8 +57,7 @@ class Verlet {
       for (let i = 0; i < this.entities[k].points.length; i++) {
         let dist = this.entities[k].points[i].pos.dist(this.mouse);
         if (dist < d) {
-          this.draggedPoint = this.entities[k].points[i];
-          p = this.draggedPoint;
+          p = this.entities[k].points[i];
         }
       }
     }
@@ -69,12 +68,29 @@ class Verlet {
     this.draggedPoint.pos.setXY(this.mouse.x, this.mouse.y)
   }
 
+  renderDraggedPoint(point) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'black';
+    ctx.arc(point.pos.x, point.pos.y, point.radius*1.5, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.closePath();
+  }
 
+
+  renderPointIndex() {
+    for (let i = 0; i < this.entities.length; i++) {
+      this.entities[i].renderPointsIndex();      
+    }
+  }
   update() {
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].update();
     }
+
+    let nearp = this.getNearestPoint();
+    nearp && this.renderDraggedPoint(nearp);
     if (this.draggedPoint) {
+      this.renderDraggedPoint(this.draggedPoint);
       this.dragPoint();
     }
   }
@@ -130,8 +146,8 @@ class Verlet {
   }
 
 
-  createCloth(posx, posy, w, h, segments, pinOffset) {
-    let cloth = new Entity();
+  createCloth(posx, posy, w, h, segments, pinOffset, iterations) {
+    let cloth = new Entity(iterations);
 
     var xStride = w / segments;
     var yStride = h / segments;

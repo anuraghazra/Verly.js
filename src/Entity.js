@@ -1,27 +1,27 @@
 class Entity {
-  constructor() {
+  constructor(iterations) {
     this.points = [];
     this.sticks = [];
-    this.iterations = 16;
+    this.iterations = iterations || 16;
   }
 
   pin(index) {
     this.points[index].pin();
   }
 
-  joinEntities(...args) {
-    let points = [];
-    let sticks = [];
-    for (let i = 0; i < args.length; i++) {
-      points.push(args[i].points);
-      sticks.push(args[i].sticks);
-    }
+  // joinEntities(...args) {
+  //   let points = [];
+  //   let sticks = [];
+  //   for (let i = 0; i < args.length; i++) {
+  //     points.push(args[i].points);
+  //     sticks.push(args[i].sticks);
+  //   }
     
-    points = [].concat.apply([], points);
-    sticks = [].concat.apply([], sticks);
-    this.points = points;
-    this.sticks = sticks;
-  }
+  //   points = [].concat.apply([], points);
+  //   sticks = [].concat.apply([], sticks);
+  //   this.points = points;
+  //   this.sticks = sticks;
+  // }
 
   setVelocity(x, y) {
     // this.points[Math.floor(Math.random() * (this.points.length - 1))].oldpos.rotate(Math.random() / 10);
