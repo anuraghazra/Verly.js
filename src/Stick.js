@@ -20,18 +20,27 @@ class Stick {
     // let percent = diff / dist / 2;
     // let offsetx = (dx * percent);
     // let offsety = (dy * percent);
-    // this.startPoint.pos.x -= offsetx;
-    // this.startPoint.pos.y -= offsety; 
-    // this.endPoint.pos.x += offsetx;
-    // this.endPoint.pos.y += offsety;
+    // if (!this.startPoint.pinned) {
+    //   this.startPoint.pos.x -= offsetx;
+    //   this.startPoint.pos.y -= offsety;
+    // }
+    // if (!this.endPoint.pinned) {
+    //   this.endPoint.pos.x += offsetx;
+    //   this.endPoint.pos.y += offsety;
+    // }
     // ----- algo two
 
     var normal = Vector.sub(this.startPoint.pos, this.endPoint.pos);
     var m = normal.magSq();
     let diff = ((this.length * this.length) - m);
     normal.mult((diff / m) * this.stiffness * stepCoef);
-    this.startPoint.pos.add(normal);
-    this.endPoint.pos.sub(normal);
+
+    if (!this.startPoint.pinned) {
+      this.startPoint.pos.add(normal);
+    }
+    if (!this.endPoint.pinned) {
+      this.endPoint.pos.sub(normal);
+    }
   }
 
   render() {
