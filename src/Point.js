@@ -8,6 +8,7 @@ class Point {
     this.gravity = new Vector(0, 1);
     this.pinned = false;
     this.radius = radius || 5;
+    this.color = '#e62a4f';
   }
 
   setRadius(radius) {
@@ -49,7 +50,7 @@ class Point {
   update() {
     if (this.pinned) return;
     let vel = Vector.sub(this.pos, this.oldpos);
-    // vel.mult(this.friction);
+    vel.mult(this.friction);
     // if the point touches the ground set groundFriction
     if (this.pos.y >= height - this.radius && vel.magSq() > 0.000001) {
       var m = vel.mag();
@@ -64,7 +65,7 @@ class Point {
 
   render() {
     ctx.beginPath();
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = this.color;
     ctx.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.closePath();

@@ -10,16 +10,20 @@ window.onload = function () {
 
   let verlet = new Verlet();
 
-  let box = verlet.createBox(100, 100, 100, 100);
-  let hexa = verlet.createHexagon(300, 300, 16);
-  let cloth = verlet.createCloth(300, 200, 200, 200, 10, 3);
-  cloth.setVelocity(-Math.random() * -0.5, Math.random());
+  // let box = verlet.createBox(100, 100, 100, 100);
+  // let cloth = verlet.createCloth(300, 200, 200, 200, 10, 3);
+  // cloth.setVelocity(-Math.random() * -0.5, Math.random());
+  let hexa = verlet.createHexagon(300, 300, 16, 1, 20);
+  let rope = verlet.createRope(100, 100, 10);
+  rope.pin(0);
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
 
     verlet.update();
+    hexa.renderPointsIndex();
+    rope.renderPointsIndex();
     // hexa.update();
     // cloth.update();
     // box.renderPointsIndex();

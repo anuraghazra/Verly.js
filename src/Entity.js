@@ -2,9 +2,12 @@ class Entity {
   constructor() {
     this.points = [];
     this.sticks = [];
-    this.iterations = 100;
+    this.iterations = 16;
   }
-
+  
+  pin(index) {
+    this.points[index].pin();
+  }
   setVelocity(x, y) {
     // this.points[Math.floor(Math.random() * (this.points.length - 1))].oldpos.rotate(Math.random() / 10);
     this.points.map(e => {
@@ -63,8 +66,8 @@ class Entity {
   }
 
   update() {
-    this.updatePoints();
     var stepCoef = 1 / this.iterations;
+    this.updatePoints();
     for (let j = 0; j < this.iterations; ++j) {
       this.updateSticks(stepCoef);
       this.updateContrains();

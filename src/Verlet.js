@@ -72,12 +72,14 @@ class Verlet {
     return box;
   }
 
-  createHexagon(x, y, segments) {
+  createHexagon(x, y, segments, stride1 = 1, stride2 = 5) {
     const hexagon = new Entity(5);
 
     var stride = (2 * Math.PI) / segments;
     let radius = 50;
 
+    let splice = 0;
+    let angle
     // points
     for (let i = 0; i < segments; ++i) {
       var theta = i * stride;
@@ -92,9 +94,9 @@ class Verlet {
 
     // sticks
     for (let i = 0; i < segments; ++i) {
-      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + 1) % segments]));
+      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + stride1) % segments]));
       hexagon.addStick(new Stick(hexagon.points[i], center));
-      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + 5) % segments]));
+      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + stride2) % segments]));
     }
 
 
@@ -128,11 +130,26 @@ class Verlet {
 
     for (x = 0; x < segments; ++x) {
       if (x % pinOffset == 0) {
-        cloth.points[x].pin();
+        cloth.pin(x);
       }
     }
 
     this.entities.push(cloth);
     return cloth;
+  }
+
+
+  createRope(x, y, segments = 10, gap = 15) {
+    let rope = new Entity();
+
+    for (let i = 0; i < segments; i++) {
+      rope.addPoint(x + i * gap, y, 0, 0)
+    }
+    
+    for (let i = 0; i < segments-1; i++) {
+      rope.addStick(new Stick(rope.points[i], rope.points[(i + 1) % segments]));
+    }
+    this.entities.push(rope);
+    return rope;
   }
 }

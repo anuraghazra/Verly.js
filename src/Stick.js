@@ -3,6 +3,7 @@ class Stick {
     this.startPoint = p1;
     this.endPoint = p2;
     this.stiffness = stiffness || 1;
+    this.color = '#f5476a';
     if (!length) {
       this.length = this.startPoint.pos.dist(this.endPoint.pos);
     } else {
@@ -45,7 +46,7 @@ class Stick {
 
   render() {
     ctx.beginPath();
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = this.color;
     ctx.moveTo(this.startPoint.pos.x, this.startPoint.pos.y);
     ctx.lineTo(this.endPoint.pos.x, this.endPoint.pos.y);
     ctx.stroke();
