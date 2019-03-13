@@ -22,6 +22,33 @@ class Verlet {
     })
   }
 
+  joinEntities(...args) {
+    let mixEntity = new Entity();
+
+    let points = [];
+    let sticks = [];
+    for (let i = 0; i < args.length; i++) {
+      points.push(args[i].points);
+      sticks.push(args[i].sticks);
+      let index = this.entities.indexOf(args[i]);
+      this.entities.splice(index, 1);
+    }
+    
+    points = [].concat.apply([], points);
+    sticks = [].concat.apply([], sticks);
+
+    mixEntity.points = points;
+    mixEntity.sticks = sticks;
+
+    this.addEntity(mixEntity);
+    console.log(this)
+    return mixEntity;
+  }
+
+  addEntity(e) {
+    this.entities.push(e);
+  }
+
   getNearestPoint() {
     // if (!this.mouseDown) return false;
     let d = 20;
@@ -68,7 +95,7 @@ class Verlet {
     box.addStick(new Stick(box.points[3], box.points[0]))
     box.addStick(new Stick(box.points[3], box.points[1]))
 
-    this.entities.push(box);
+    this.addEntity(box);
     return box;
   }
 
@@ -78,8 +105,6 @@ class Verlet {
     var stride = (2 * Math.PI) / segments;
     let radius = 50;
 
-    let splice = 0;
-    let angle
     // points
     for (let i = 0; i < segments; ++i) {
       var theta = i * stride;
@@ -100,7 +125,7 @@ class Verlet {
     }
 
 
-    this.entities.push(hexagon);
+    this.addEntity(hexagon);
     return hexagon;
   }
 
@@ -134,7 +159,7 @@ class Verlet {
       }
     }
 
-    this.entities.push(cloth);
+    this.addEntity(cloth);
     return cloth;
   }
 
@@ -145,11 +170,11 @@ class Verlet {
     for (let i = 0; i < segments; i++) {
       rope.addPoint(x + i * gap, y, 0, 0)
     }
-    
-    for (let i = 0; i < segments-1; i++) {
+
+    for (let i = 0; i < segments - 1; i++) {
       rope.addStick(new Stick(rope.points[i], rope.points[(i + 1) % segments]));
     }
-    this.entities.push(rope);
+    this.addEntity(rope);
     return rope;
   }
 }
