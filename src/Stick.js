@@ -1,5 +1,5 @@
 class Stick {
-  constructor(p1, p2, stiffness, length) {
+  constructor(p1, p2, stiffness, length, entity) {
     this.startPoint = p1;
     this.endPoint = p2;
     this.stiffness = stiffness || 1;
@@ -9,7 +9,8 @@ class Stick {
     } else {
       this.length = length;
     }
-
+    this.startPoint.sticks.push(this);
+    this.endPoint.sticks.push(this);
   }
 
   update(stepCoef) {
@@ -37,7 +38,6 @@ class Stick {
     let dist = Math.sqrt(dx * dx + dy * dy);
     let diff = (this.length - dist) / dist;
 
-    // if (dist > tear_distance) this.p1.remove_constraint(this);
     var offsetx = dx * diff * 0.5;
     var offsety = dy * diff * 0.5;
 

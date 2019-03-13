@@ -9,6 +9,8 @@ class Point {
     this.pinned = false;
     this.radius = radius || 5;
     this.color = '#e62a4f';
+
+    this.sticks = [];
   }
 
   setRadius(radius) {

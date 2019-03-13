@@ -2,8 +2,10 @@ class Verlet {
   constructor(iterations) {
     this.entities = [];
     this.iterations = iterations;
+    
+    
+    // Drag Interaction
     this.draggedPoint = null;
-
     this.mouseDown = false;
     this.mouse = new Vector();
     canvas.addEventListener('mousedown', () => {
@@ -22,27 +24,38 @@ class Verlet {
     })
   }
 
+  /**
+   * Joins two Entity Class Together
+   * @param  {...Entity} args 
+   */
   joinEntities(...args) {
     let mixEntity = new Entity();
 
     let points = [];
     let sticks = [];
+
+    // loop through the args and push points and sticks to the array
     for (let i = 0; i < args.length; i++) {
       points.push(args[i].points);
       sticks.push(args[i].sticks);
+
+      // get the index which item we should splice in [this.entities]
       let index = this.entities.indexOf(args[i]);
       this.entities.splice(index, 1);
     }
-    
+
+    // join multiple arrays
     points = [].concat.apply([], points);
     sticks = [].concat.apply([], sticks);
 
+    // add the arrays to the mix::Entity
     mixEntity.points = points;
     mixEntity.sticks = sticks;
 
+    // add the mix::Entity to [this.entities]
     this.addEntity(mixEntity);
     console.log(this)
-    return mixEntity;
+    return mixEntity; // return for chaining
   }
 
   addEntity(e) {
@@ -71,7 +84,7 @@ class Verlet {
   renderDraggedPoint(point) {
     ctx.beginPath();
     ctx.strokeStyle = 'black';
-    ctx.arc(point.pos.x, point.pos.y, point.radius*1.5, 0, Math.PI*2);
+    ctx.arc(point.pos.x, point.pos.y, point.radius * 1.5, 0, Math.PI * 2);
     ctx.stroke();
     ctx.closePath();
   }
@@ -79,16 +92,23 @@ class Verlet {
 
   renderPointIndex() {
     for (let i = 0; i < this.entities.length; i++) {
-      this.entities[i].renderPointsIndex();      
+      this.entities[i].renderPointsIndex();
     }
   }
+
+  /**
+   * @method update
+   * updates all the physics stuff
+   */
   update() {
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].update();
     }
 
-    let nearp = this.getNearestPoint();
-    nearp && this.renderDraggedPoint(nearp);
+    if (!this.mouseDown) {
+      let nearp = this.getNearestPoint();
+      nearp && this.renderDraggedPoint(nearp);
+    }
     if (this.draggedPoint) {
       this.renderDraggedPoint(this.draggedPoint);
       this.dragPoint();
@@ -98,9 +118,15 @@ class Verlet {
 
 
 
-
+  /**
+   * @mthod createBox
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} w 
+   * @param {number} h 
+   */
   createBox(x, y, w, h) {
-    const box = new Entity();
+    const box = new Entity(this.iterations);
     box.addPoint(x, y, 0, 0);
     box.addPoint(x + w, y, 0, 0);
     box.addPoint(x + w, y + h, 0, 0);
@@ -115,8 +141,17 @@ class Verlet {
     return box;
   }
 
+
+  /**
+   * @method createHexagon
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} segments 
+   * @param {number} stride1=1
+   * @param {number} stride2=5
+   */
   createHexagon(x, y, segments, stride1 = 1, stride2 = 5) {
-    const hexagon = new Entity(5);
+    const hexagon = new Entity(this.iterations);
 
     var stride = (2 * Math.PI) / segments;
     let radius = 50;
@@ -145,9 +180,17 @@ class Verlet {
     return hexagon;
   }
 
-
-  createCloth(posx, posy, w, h, segments, pinOffset, iterations) {
-    let cloth = new Entity(iterations);
+  /**
+   * @method createCloth
+   * @param {number} posx 
+   * @param {number} posy 
+   * @param {number} w 
+   * @param {number} h 
+   * @param {number} segments 
+   * @param {number} pinOffset 
+   */
+  createCloth(posx, posy, w, h, segments, pinOffset) {
+    let cloth = new Entity(this.iterations);
 
     var xStride = w / segments;
     var yStride = h / segments;
@@ -169,19 +212,40 @@ class Verlet {
       }
     }
 
+    // as the name suggest
+    function tear() {
+      for (let i = 0; i < cloth.sticks.length; i++) {
+        // find the distance between two points
+        let dist = cloth.sticks[i].startPoint.pos.dist(cloth.sticks[i].endPoint.pos)
+        if (dist > 18) { // remove if the dist is > than threshold 
+          cloth.removeSticks(cloth.sticks[i].startPoint);
+        }
+      }
+    }
+
+    cloth.tear = tear;
+
     for (x = 0; x < segments; ++x) {
-      if (x % pinOffset == 0) {
+      if (x % pinOffset == 0) { // magic
         cloth.pin(x);
       }
     }
 
+    console.log(cloth)
     this.addEntity(cloth);
     return cloth;
   }
 
 
+  /**
+   * @method createRope
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} segments=10
+   * @param {number} gap=15
+   */
   createRope(x, y, segments = 10, gap = 15) {
-    let rope = new Entity();
+    let rope = new Entity(this.iterations);
 
     for (let i = 0; i < segments; i++) {
       rope.addPoint(x + i * gap, y, 0, 0)

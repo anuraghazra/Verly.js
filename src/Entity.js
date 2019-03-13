@@ -16,12 +16,16 @@ class Entity {
   //     points.push(args[i].points);
   //     sticks.push(args[i].sticks);
   //   }
-    
+
   //   points = [].concat.apply([], points);
   //   sticks = [].concat.apply([], sticks);
   //   this.points = points;
   //   this.sticks = sticks;
   // }
+  removeSticks(p) {
+    this.sticks.splice(this.sticks.indexOf(p.sticks[0]), 1);
+    p.sticks.splice(0, 1);
+  }
 
   setVelocity(x, y) {
     // this.points[Math.floor(Math.random() * (this.points.length - 1))].oldpos.rotate(Math.random() / 10);
@@ -30,11 +34,13 @@ class Entity {
       e.oldpos.y += y;
     })
   }
+
   addPoint(x, y, vx, vy) {
     let p = new Point(x, y, vx, vy);
     this.points.push(p);
     return p;
   }
+
   addStick(stick) {
     this.sticks.push(stick);
     // let s = new Stick(this.points[p1], this.points[p2]);
