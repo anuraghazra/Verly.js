@@ -9,26 +9,12 @@ class Entity {
     this.points[index].pin();
   }
 
-  // joinEntities(...args) {
-  //   let points = [];
-  //   let sticks = [];
-  //   for (let i = 0; i < args.length; i++) {
-  //     points.push(args[i].points);
-  //     sticks.push(args[i].sticks);
-  //   }
-
-  //   points = [].concat.apply([], points);
-  //   sticks = [].concat.apply([], sticks);
-  //   this.points = points;
-  //   this.sticks = sticks;
-  // }
   removeSticks(p) {
     this.sticks.splice(this.sticks.indexOf(p.sticks[0]), 1);
     p.sticks.splice(0, 1);
   }
 
   setVelocity(x, y) {
-    // this.points[Math.floor(Math.random() * (this.points.length - 1))].oldpos.rotate(Math.random() / 10);
     this.points.map(e => {
       e.oldpos.x += x;
       e.oldpos.y += y;
@@ -62,27 +48,27 @@ class Entity {
     }
   }
 
-  renderPoints() {
-    for (let i = 0; i < this.points.length; i++) {
-      this.points[i].render();
-    }
-  }
-
   updateSticks(stepCoef) {
     for (let i = 0; i < this.sticks.length; i++) {
       this.sticks[i].update(stepCoef);
     }
   }
 
-  renderSticks() {
-    for (let i = 0; i < this.sticks.length; i++) {
-      this.sticks[i].render();
+  renderPoints() {
+    for (let i = 0; i < this.points.length; i++) {
+      this.points[i].render();
     }
   }
-
+  
   updateContrains() {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].constrain();
+    }
+  }
+
+  renderSticks() {
+    for (let i = 0; i < this.sticks.length; i++) {
+      this.sticks[i].render();
     }
   }
 
@@ -100,8 +86,8 @@ class Entity {
     this.updatePoints();
     for (let j = 0; j < this.iterations; ++j) {
       this.updateSticks(stepCoef);
+      this.updateContrains();
     }
-    this.updateContrains();
     this.renderPoints();
     this.renderSticks();
   }

@@ -3,7 +3,7 @@ class Point {
     this.pos = new Vector(x, y);
     this.oldpos = new Vector(x + (vx || 0), y + (vy || 0));
     this.bounce = 0.99;
-    this.friction = 0.99;
+    this.friction = 0.97;
     this.groundFriction = 0.8;
     this.gravity = new Vector(0, 1);
     this.pinned = false;
@@ -31,7 +31,7 @@ class Point {
     var delta = Vector.sub(this.pos, target.pos);
     var dist = delta.magSq();
 
-    let magR = (this.radius * this.radius) + radius || this.radius * this.radius;
+    let magR = (!radius) ? this.radius * this.radius : radius;
     if (dist < magR) {
       var f = delta.normalizeTo((1.0 - dist / magR)).mult(strength || this.forceAcc);
       this.applyForce(f);
@@ -52,8 +52,6 @@ class Point {
     //   this.pos.x = width - 1;
     // }
     let vel = Vector.sub(this.pos, this.oldpos);
-    vel.mult(this.friction);
-
     if (this.pos.x > width - this.radius) {
       this.pos.x = width - this.radius;
       this.oldpos.x = (this.pos.x + vel.x) * this.bounce;

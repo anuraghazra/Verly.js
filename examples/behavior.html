@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Verly.js</title>
+  <script src="../src/Vector.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      color: #ce072e;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 10px;
+    }
+
+    canvas {
+      outline: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="c"></canvas>
+
+  <script src="../src/Utils.js"></script>
+  <script src="../src/Point.js"></script>
+  <script src="../src/Stick.js"></script>
+  <script src="../src/Entity.js"></script>
+  <script src="../src/Verly.js"></script>
+  <script>
+    let canvas = document.getElementById('c');
+    let ctx = canvas.getContext('2d');
+    let width = 600;
+    let height = 500;
+    canvas.width = width;
+    canvas.height = height;
+
+    window.onload = function () {
+
+      let verly = new Verly(8);
+
+      let mouse = new Point(0, 0);
+      mouse.setForceAcc(-30);
+      mouse.setRadius(100);
+      let mBehavior = 20;
+
+      let particles = new Entity();
+
+      function addParticles(x, y) {
+        let p = new Point(x, y);
+        p.setRadius(3);
+        particles.addPoint(p);
+      }
+      for (let i = 0; i < 1000; i++) {
+        addParticles(random(width), random(height));
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        if (e.altKey) {
+          addParticles(e.offsetX, e.offsetY);
+        }
+
+        mouse.pos.x = e.offsetX;
+        mouse.pos.y = e.offsetY;
+      })
+
+      window.addEventListener('mousedown', () => {
+        mBehavior = -5;
+      })
+      window.addEventListener('mouseup', () => {
+        mBehavior = 20;
+      })
+
+      let hexa = verly.createHexagon(100, 100, 16);
+      hexa.points.forEach(e => e.setForceAcc(1.5));
+
+      particles = verly.joinEntities(particles, hexa);
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.points.length; i++) {
+          for (let j = 0; j < particles.points.length; j++) {
+            if (particles.points[i] !== particles.points[j]) {
+              particles.points[j].behavior(particles.points[i], 20 * 90, 1)
+            }
+          }
+          particles.points[i].behavior(mouse, mouse.radius * mouse.radius, mBehavior)
+        }
+
+        verly.update();
+
+        // verly.renderPointIndex();
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@ class Stick {
   constructor(p1, p2, length, stiffness) {
     this.startPoint = p1;
     this.endPoint = p2;
-    this.stiffness = stiffness || 1;
+    this.stiffness = stiffness || 2;
     this.color = '#f5476a';
     if (!length) {
       this.length = this.startPoint.pos.dist(this.endPoint.pos);
@@ -36,13 +36,14 @@ class Stick {
     let dx = this.endPoint.pos.x - this.startPoint.pos.x;
     let dy = this.endPoint.pos.y - this.startPoint.pos.y;
     let dist = Math.sqrt(dx * dx + dy * dy);
-    let diff = (this.length - dist) / dist;
+    let diff = (this.length - dist) / dist * this.stiffness;
 
     let offsetx = dx * diff * 0.5;
     let offsety = dy * diff * 0.5;
 
-    var m1 = this.startPoint.mass + this.endPoint.mass;
-    var m2 = this.startPoint.mass / m1;
+    // calculate mass
+    let m1 = this.startPoint.mass + this.endPoint.mass;
+    let m2 = this.startPoint.mass / m1;
     m1 = this.endPoint.mass / m1;
 
     if (!this.startPoint.pinned) {
@@ -54,13 +55,17 @@ class Stick {
       this.endPoint.pos.y += offsety * m2;
     }
 
-
-
+    
+    // calculate mass
+    // var m1 = this.startPoint.mass + this.endPoint.mass;
+    // var m2 = this.startPoint.mass / m1;
+    // m1 = this.endPoint.mass / m1;
+    
     // var normal = Vector.sub(this.startPoint.pos, this.endPoint.pos);
     // var m = normal.magSq();
     // let diff = ((this.length * this.length) - m);
     // normal.mult((diff / m) * this.stiffness * stepCoef);
-
+    
     // if (!this.startPoint.pinned) {
     //   this.startPoint.pos.add(normal);
     // }

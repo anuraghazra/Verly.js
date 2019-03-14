@@ -5,28 +5,7 @@
  * @param {number} x 
  * @param {number} y 
  */
-let normalizedRandom = function () {
-  return Math.random() * 2 - 1;
-};
-let random = function (rand, min, max) {
-  //one param
-  if (arguments.length === 1) {
-    return Math.random() * arguments[0];
-  } else if (arguments.length == 2) {
-    //min and max
-    max = min;
-    min = rand;
-    rand = Math.random;
-  }
-  if (!min && !max) {
-    return Math.random();
-  } else if (!max) {
-    //if only one is provided, then thats actually the max
-    max = min;
-    return rand() * max;
-  }
-  return rand() * (max - min) + min;
-};
+
 function Vector(x, y) {
   this.x = x || 0;
   this.y = y || 0;

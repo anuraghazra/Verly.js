@@ -57,7 +57,6 @@ class Verly {
 
     // add the mix::Entity to [this.entities]
     this.addEntity(mixEntity);
-    console.log(this)
     return mixEntity; // return for chaining
   }
 
@@ -289,8 +288,8 @@ class Verly {
     // Feet
     let f1 = new Point(x0 + 30, y0 + 190, 0, 0, 10);
     let f2 = new Point(x0 - 30, y0 + 190, 0, 0, 10);
-    f1.setMass(10);
-    f2.setMass(10);
+    f1.setMass(20);
+    f2.setMass(20);
     ragdoll.addPoint(f1);
     ragdoll.addPoint(f2);
 
