@@ -1,9 +1,12 @@
-class Verlet {
+/**
+ * @class Verly
+ */
+class Verly {
   constructor(iterations) {
     this.entities = [];
     this.iterations = iterations;
-    
-    
+
+
     // Drag Interaction
     this.draggedPoint = null;
     this.mouseDown = false;
@@ -119,7 +122,7 @@ class Verlet {
 
 
   /**
-   * @mthod createBox
+   * @method createBox
    * @param {number} x 
    * @param {number} y 
    * @param {number} w 
@@ -131,11 +134,11 @@ class Verlet {
     box.addPoint(x + w, y, 0, 0);
     box.addPoint(x + w, y + h, 0, 0);
     box.addPoint(x, y + h, 0, 0);
-    box.addStick(new Stick(box.points[0], box.points[1]))
-    box.addStick(new Stick(box.points[1], box.points[2]))
-    box.addStick(new Stick(box.points[2], box.points[3]))
-    box.addStick(new Stick(box.points[3], box.points[0]))
-    box.addStick(new Stick(box.points[3], box.points[1]))
+    box.addStick(0, 1);
+    box.addStick(1, 2);
+    box.addStick(2, 3);
+    box.addStick(3, 0);
+    box.addStick(3, 1);
 
     this.addEntity(box);
     return box;
@@ -147,14 +150,14 @@ class Verlet {
    * @param {number} x 
    * @param {number} y 
    * @param {number} segments 
+   * @param {number} radius=50
    * @param {number} stride1=1
    * @param {number} stride2=5
    */
-  createHexagon(x, y, segments, stride1 = 1, stride2 = 5) {
+  createHexagon(x, y, segments, radius=50, stride1 = 1, stride2 = 5) {
     const hexagon = new Entity(this.iterations);
 
     var stride = (2 * Math.PI) / segments;
-    let radius = 50;
 
     // points
     for (let i = 0; i < segments; ++i) {
@@ -170,9 +173,9 @@ class Verlet {
 
     // sticks
     for (let i = 0; i < segments; ++i) {
-      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + stride1) % segments]));
+      hexagon.addStick(i, (i + stride1) % segments);
       hexagon.addStick(new Stick(hexagon.points[i], center));
-      hexagon.addStick(new Stick(hexagon.points[i], hexagon.points[(i + stride2) % segments]));
+      hexagon.addStick(i, (i + stride2) % segments);
     }
 
 
@@ -200,24 +203,25 @@ class Verlet {
       for (x = 0; x < segments; ++x) {
         var px = posx + x * xStride - w / 2 + xStride / 2;
         var py = posy + y * yStride - h / 2 + yStride / 2;
-        cloth.addPoint(px, py, 0, 0);
-
+        
+        cloth.addPoint(px, py);
+        
         if (x > 0) {
-          cloth.addStick(new Stick(cloth.points[y * segments + x], cloth.points[y * segments + x - 1]));
+          cloth.addStick(y * segments + x, y * segments + x - 1);
         }
 
         if (y > 0) {
-          cloth.addStick(new Stick(cloth.points[y * segments + x], cloth.points[(y - 1) * segments + x]));
+          cloth.addStick(y * segments + x, (y - 1) * segments + x);
         }
       }
     }
 
     // as the name suggest
-    function tear() {
+    function tear(threshold) {
       for (let i = 0; i < cloth.sticks.length; i++) {
         // find the distance between two points
         let dist = cloth.sticks[i].startPoint.pos.dist(cloth.sticks[i].endPoint.pos)
-        if (dist > 18) { // remove if the dist is > than threshold 
+        if (dist > (threshold || 20)) { // remove if the dist is > than threshold 
           cloth.removeSticks(cloth.sticks[i].startPoint);
         }
       }
@@ -231,7 +235,6 @@ class Verlet {
       }
     }
 
-    console.log(cloth)
     this.addEntity(cloth);
     return cloth;
   }
@@ -252,9 +255,124 @@ class Verlet {
     }
 
     for (let i = 0; i < segments - 1; i++) {
-      rope.addStick(new Stick(rope.points[i], rope.points[(i + 1) % segments]));
+      rope.addStick(i, (i + 1) % segments);
     }
     this.addEntity(rope);
     return rope;
+  }
+
+
+  createRagdoll(x0, y0) {
+    let ragdoll = new Entity(this.iterations);
+
+    // Head
+    // x, y, extremity, gravity, radius
+    // var h = ;
+    // h.head = true;
+    // h.oldx = x0 + (Math.random() - 0.5) * 25;
+
+    let head = new Point(x0, y0, 0, 0, 15);
+    head.setMass(5);
+    ragdoll.addPoint(head);
+
+    // Groin
+    ragdoll.addPoint(x0, y0 + 100);
+
+    // Hips
+    ragdoll.addPoint(x0 + 30, y0 + 90);
+    ragdoll.addPoint(x0 - 30, y0 + 90);
+
+    // Knees
+    ragdoll.addPoint(x0 + 20, y0 + 150);
+    ragdoll.addPoint(x0 - 20, y0 + 150);
+
+    // Feet
+    let f1 = new Point(x0 + 30, y0 + 190, 0, 0, 10);
+    let f2 = new Point(x0 - 30, y0 + 190, 0, 0, 10);
+    f1.setMass(10);
+    f2.setMass(10);
+    ragdoll.addPoint(f1);
+    ragdoll.addPoint(f2);
+
+    // Neck
+    ragdoll.addPoint(x0, y0 + 25);
+
+    // Shoulders
+    ragdoll.addPoint(x0 + 25, y0 + 30);
+    ragdoll.addPoint(x0 - 25, y0 + 30);
+
+    // Hands
+    let h1 = new Point(x0 + 15, y0 + 105, 0, 0, 10);
+    let h2 = new Point(x0 - 15, y0 + 105, 0, 0, 10);
+    h1.setMass(5);
+    h2.setMass(5);
+    ragdoll.addPoint(h1);
+    ragdoll.addPoint(h2);
+
+
+
+    // "Muscles"
+    // Head - shoulders
+    ragdoll.addStick(0, 9);
+    ragdoll.addStick(0, 10);
+    // Shoulder - shoulder
+    ragdoll.addStick(9, 10);
+
+    // Shoulders - hips
+    ragdoll.addStick(9, 2);
+    ragdoll.addStick(10, 3);
+    // Shoulders - hips opposite side
+    ragdoll.addStick(9, 3);
+    ragdoll.addStick(10, 2);
+
+    // Hips - feet
+    ragdoll.addStick(2, 6);
+    ragdoll.addStick(3, 7);
+
+    // Hips - feet, opposite
+    ragdoll.addStick(2, 7);
+    ragdoll.addStick(3, 6);
+
+    // Head - groin
+    ragdoll.addStick(0, 1);
+
+    // Hip - hip
+    ragdoll.addStick(2, 3);
+    // Shoulder - hip
+    ragdoll.addStick(9, 2);
+    ragdoll.addStick(10, 3);
+
+    // Head - knee
+    ragdoll.addStick(0, 4);
+    // Head - knee
+    ragdoll.addStick(0, 5);
+
+    // Head feet
+    ragdoll.addStick(0, 6);
+    ragdoll.addStick(0, 7);
+
+    // Body parts
+    // Hips
+    ragdoll.addStick(1, 2);
+    ragdoll.addStick(1, 3);
+    // Legs
+    ragdoll.addStick(2, 4);
+    ragdoll.addStick(3, 5);
+    ragdoll.addStick(4, 6);
+    ragdoll.addStick(5, 7);
+
+    ragdoll.addStick(0, 8);
+    ragdoll.addStick(8, 1);
+
+    // Left arm
+    ragdoll.addStick(8, 9);
+    ragdoll.addStick(9, 11);
+
+    // Right arm
+    ragdoll.addStick(8, 10);
+    ragdoll.addStick(10, 12);
+
+    this.addEntity(ragdoll);
+    return ragdoll;
   }
 }

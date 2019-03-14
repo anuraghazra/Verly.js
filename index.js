@@ -8,27 +8,35 @@ canvas.height = height;
 
 window.onload = function () {
 
-  let verlet = new Verlet(8);
+  let verly = new Verly(8);
 
+  let particles = new Entity();
 
-  // let box = verlet.createBox(300, 300, 100, 100);
-  // let hexa = verlet.createHexagon(300, 300, 16, 1, 20);
-  // let rope = verlet.createRope(100, 100, 10);
-  let cloth = verlet.createCloth(300, 200, 200, 200, 20, 1);
-  // rope.pin(0);
+  for (let i = 0; i < 1000; i++) {
+    let p = new Point(random(width), random(height));
+    p.setRadius(3);
+    p.setMass(1);
+    particles.addPoint(p)
+  }
 
-  // let mix = verlet.joinEntities(hexa, rope);
-  // mix.addStick(new Stick(mix.points[26], mix.points[0], 1, 5));
+  let hexa = verly.createHexagon(100, 100, 32, 50, 10);
+  hexa.points.forEach(e => e.setForceAcc(1.5));
 
+  particles = verly.joinEntities(particles, hexa);
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
-    verlet.update();
-    // verlet.renderPointIndex();
-    cloth.tear();
-    cloth.setVelocity(Math.random() * 0.5, Math.random() * 0.5)
+    for (let i = 0; i < particles.points.length; i++) {
+      for (let j = 0; j < particles.points.length; j++) {
+        if (particles.points[i] !== particles.points[j]) {
+          particles.points[j].behavior(particles.points[i], 20 * 90)
+        }
+      }
+    }
+    verly.update();
 
+    // verly.renderPointIndex();
 
     requestAnimationFrame(animate);
   }

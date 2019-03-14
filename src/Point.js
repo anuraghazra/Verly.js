@@ -9,15 +9,36 @@ class Point {
     this.pinned = false;
     this.radius = radius || 5;
     this.color = '#e62a4f';
-
+    this.mass = 1;
     this.sticks = [];
+    this.forceAcc = 1;
   }
 
+  setForceAcc(f) {
+    this.forceAcc = f;
+  }
+  setMass(m) {
+    this.mass = m;
+  }
   setRadius(radius) {
     this.radius = radius;
   }
   pin() {
     this.pinned = true;
+  }
+
+  behavior(target, radius, strength) {
+    var delta = Vector.sub(this.pos, target.pos);
+    var dist = delta.magSq();
+
+    let magR = (this.radius * this.radius) + radius || this.radius * this.radius;
+    if (dist < magR) {
+      var f = delta.normalizeTo((1.0 - dist / magR)).mult(strength || this.forceAcc);
+      this.applyForce(f);
+    }
+  }
+  applyForce(f) {
+    this.pos.add(f);
   }
 
   constrain() {
@@ -33,15 +54,15 @@ class Point {
     let vel = Vector.sub(this.pos, this.oldpos);
     vel.mult(this.friction);
 
-    if (this.pos.x > width-this.radius) {
-      this.pos.x = width-this.radius;
+    if (this.pos.x > width - this.radius) {
+      this.pos.x = width - this.radius;
       this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     } else if (this.pos.x < this.radius) {
       this.pos.x = this.radius;
       this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
-    if (this.pos.y > height-this.radius) {
-      this.pos.y = height-this.radius;
+    if (this.pos.y > height - this.radius) {
+      this.pos.y = height - this.radius;
       this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
     } else if (this.pos.y < this.radius) {
       this.pos.y = this.radius;

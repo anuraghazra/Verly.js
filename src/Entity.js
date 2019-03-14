@@ -35,16 +35,25 @@ class Entity {
     })
   }
 
-  addPoint(x, y, vx, vy) {
-    let p = new Point(x, y, vx, vy);
+  addPoint(x, y, vx, vy, radius) {
+    let p
+    if (x instanceof Point) {
+      p = x;
+    } else {
+      p = new Point(x, y, vx, vy, radius);
+    }
     this.points.push(p);
     return p;
   }
 
-  addStick(stick) {
-    this.sticks.push(stick);
-    // let s = new Stick(this.points[p1], this.points[p2]);
-    // return s;
+  addStick(p1, p2, length) {
+    let s;
+    if (p1 instanceof Stick) {
+      this.sticks.push(p1);
+    } else {
+      this.sticks.push(new Stick(this.points[p1], this.points[p2], length));
+    }
+    return s;
   }
 
   updatePoints() {
@@ -91,8 +100,8 @@ class Entity {
     this.updatePoints();
     for (let j = 0; j < this.iterations; ++j) {
       this.updateSticks(stepCoef);
-      this.updateContrains();
     }
+    this.updateContrains();
     this.renderPoints();
     this.renderSticks();
   }

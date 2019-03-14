@@ -1,5 +1,5 @@
 class Stick {
-  constructor(p1, p2, stiffness, length, entity) {
+  constructor(p1, p2, length, stiffness) {
     this.startPoint = p1;
     this.endPoint = p2;
     this.stiffness = stiffness || 1;
@@ -38,17 +38,23 @@ class Stick {
     let dist = Math.sqrt(dx * dx + dy * dy);
     let diff = (this.length - dist) / dist;
 
-    var offsetx = dx * diff * 0.5;
-    var offsety = dy * diff * 0.5;
+    let offsetx = dx * diff * 0.5;
+    let offsety = dy * diff * 0.5;
+
+    var m1 = this.startPoint.mass + this.endPoint.mass;
+    var m2 = this.startPoint.mass / m1;
+    m1 = this.endPoint.mass / m1;
 
     if (!this.startPoint.pinned) {
-      this.startPoint.pos.x -= offsetx;
-      this.startPoint.pos.y -= offsety;
+      this.startPoint.pos.x -= offsetx * m1;
+      this.startPoint.pos.y -= offsety * m1;
     }
     if (!this.endPoint.pinned) {
-      this.endPoint.pos.x += offsetx;
-      this.endPoint.pos.y += offsety;
+      this.endPoint.pos.x += offsetx * m2;
+      this.endPoint.pos.y += offsety * m2;
     }
+
+
 
     // var normal = Vector.sub(this.startPoint.pos, this.endPoint.pos);
     // var m = normal.magSq();
