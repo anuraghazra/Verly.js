@@ -34,6 +34,7 @@
   <script src="../src/Point.js"></script>
   <script src="../src/Stick.js"></script>
   <script src="../src/Entity.js"></script>
+  <script src="../src/Mouse.js"></script>
   <script src="../src/Verly.js"></script>
   <script>
     let canvas = document.getElementById('c');
@@ -45,29 +46,16 @@
 
     window.onload = function () {
 
-      let verly = new Verly(8);
+      let verly = new Verly(16);
 
       let mouse = new Point(0, 0);
       mouse.setForceAcc(-30);
       mouse.setRadius(100);
-      let mBehavior = 20;
-
-      let particles = new Entity();
-
-      function addParticles(x, y) {
-        let p = new Point(x, y);
-        p.setRadius(3);
-        particles.addPoint(p);
-      }
-      for (let i = 0; i < 1000; i++) {
-        addParticles(random(width), random(height));
-      }
-
+      let mBehavior = 5;
       window.addEventListener('mousemove', (e) => {
         if (e.altKey) {
           addParticles(e.offsetX, e.offsetY);
         }
-
         mouse.pos.x = e.offsetX;
         mouse.pos.y = e.offsetY;
       })
@@ -76,12 +64,24 @@
         mBehavior = -5;
       })
       window.addEventListener('mouseup', () => {
-        mBehavior = 20;
+        mBehavior = 5;
       })
 
-      let hexa = verly.createHexagon(100, 100, 16);
-      hexa.points.forEach(e => e.setForceAcc(1.5));
 
+
+      
+      let particles = new Entity();
+      function addParticles(x, y) {
+        let p = new Point(x, y);
+        p.setRadius(3);
+        p.setGravity(new Vector(0, 0));
+        particles.addPoint(p);
+      }
+      for (let i = 0; i < 1000; i++) {
+        addParticles(random(width), random(height));
+      }
+
+      let hexa = verly.createHexagon(100, 100, 16);
       particles = verly.joinEntities(particles, hexa);
 
       function animate() {
@@ -90,10 +90,10 @@
         for (let i = 0; i < particles.points.length; i++) {
           for (let j = 0; j < particles.points.length; j++) {
             if (particles.points[i] !== particles.points[j]) {
-              particles.points[j].behavior(particles.points[i], 20 * 90, 1)
+              particles.points[j].resolveBehaviors(particles.points[i], 20 * 90, 1)
             }
           }
-          particles.points[i].behavior(mouse, mouse.radius * mouse.radius, mBehavior)
+          particles.points[i].resolveBehaviors(mouse, mouse.radius * mouse.radius, mBehavior)
         }
 
         verly.update();

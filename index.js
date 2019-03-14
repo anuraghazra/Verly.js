@@ -9,10 +9,27 @@ window.onload = function () {
 
   let verly = new Verly(16);
 
-  verly.createBox(100, 100, 100, 100);
-  verly.createHexagon(100, 100, 32, 50, 5, 8);
-  verly.createRagdoll(400, 100, 32, 100, 8, 10);
-  
+  let custom = new Entity(16);
+
+  window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+
+    return false;
+  })
+  window.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    if (e.button !== 2) return;
+
+    let p = new Point(e.offsetX, e.offsetY);
+    p.addBehavior(new Behavior());
+    custom.addPoint(p);
+    if (custom.points.length > 1) {
+      custom.addStick(custom.points.length - 2, custom.points.length - 1);
+    }
+  })
+
+  verly.createRagdoll(100, 100, 100, 100);
+  verly.addEntity(custom);
   function animate() {
     ctx.clearRect(0, 0, width, height);
 

@@ -11,9 +11,13 @@ class Point {
     this.color = '#e62a4f';
     this.mass = 1;
     this.sticks = [];
+    // this.behaviors = [];
     this.forceAcc = 1;
   }
 
+  setGravity(g) {
+    this.gravity = g;
+  }
   setForceAcc(f) {
     this.forceAcc = f;
   }
@@ -23,20 +27,28 @@ class Point {
   setRadius(radius) {
     this.radius = radius;
   }
+
+  resetVelocity() {
+    this.oldpos.setXY(this.pos.x, this.pos.y);
+  }
   pin() {
     this.pinned = true;
   }
+  unpin() {
+    this.pinned = false;
+  }
 
-  behavior(target, radius, strength) {
-    var delta = Vector.sub(this.pos, target.pos);
+  resolveBehaviors(p, radius, strength) {
+    var delta = Vector.sub(this.pos, p.pos);
     var dist = delta.magSq();
 
     let magR = (!radius) ? this.radius * this.radius : radius;
     if (dist < magR) {
-      var f = delta.normalizeTo((1.0 - dist / magR)).mult(strength || this.forceAcc);
+      var f = delta.normalizeTo(1 - (dist / magR)).mult(strength || this.forceAcc);
       this.applyForce(f);
     }
   }
+
   applyForce(f) {
     this.pos.add(f);
   }
@@ -67,6 +79,7 @@ class Point {
       this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
     }
   };
+
 
   update() {
     if (this.pinned) return;

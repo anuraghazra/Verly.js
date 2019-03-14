@@ -6,27 +6,9 @@ class Verly {
     this.entities = [];
     this.iterations = iterations;
 
-
-    // Drag Interaction
-    this.draggedPoint = null;
-    this.mouseDown = false;
-    this.mouse = new Vector();
-    canvas.addEventListener('mousedown', () => {
-      this.mouseDown = true;
-      this.draggedPoint = this.getNearestPoint();
-      if (this.draggedPoint) {
-        this.dragPoint();
-      }
-    })
-    canvas.addEventListener('mouseup', () => {
-      this.mouseDown = false;
-      this.draggedPoint = null;
-    })
-    canvas.addEventListener('mousemove', (e) => {
-      this.mouse.setXY(e.offsetX, e.offsetY);
-    })
+    this.mouse = new Mouse(this.entities);
   }
-
+  
   /**
    * Joins two Entity Class Together
    * @param  {...Entity} args 
@@ -64,34 +46,6 @@ class Verly {
     this.entities.push(e);
   }
 
-  getNearestPoint() {
-    // if (!this.mouseDown) return false;
-    let d = 20;
-    let p = null;
-    for (let k = 0; k < this.entities.length; k++) {
-      for (let i = 0; i < this.entities[k].points.length; i++) {
-        let dist = this.entities[k].points[i].pos.dist(this.mouse);
-        if (dist < d) {
-          p = this.entities[k].points[i];
-        }
-      }
-    }
-    return p;
-  }
-
-  dragPoint() {
-    this.draggedPoint.pos.setXY(this.mouse.x, this.mouse.y)
-  }
-
-  renderDraggedPoint(point) {
-    ctx.beginPath();
-    ctx.strokeStyle = 'black';
-    ctx.arc(point.pos.x, point.pos.y, point.radius * 1.5, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.closePath();
-  }
-
-
   renderPointIndex() {
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].renderPointsIndex();
@@ -107,14 +61,7 @@ class Verly {
       this.entities[i].update();
     }
 
-    if (!this.mouseDown) {
-      let nearp = this.getNearestPoint();
-      nearp && this.renderDraggedPoint(nearp);
-    }
-    if (this.draggedPoint) {
-      this.renderDraggedPoint(this.draggedPoint);
-      this.dragPoint();
-    }
+    this.mouse.drag();
   }
 
 
@@ -153,7 +100,7 @@ class Verly {
    * @param {number} stride1=1
    * @param {number} stride2=5
    */
-  createHexagon(x, y, segments, radius=50, stride1 = 1, stride2 = 5) {
+  createHexagon(x, y, segments, radius = 50, stride1 = 1, stride2 = 5) {
     const hexagon = new Entity(this.iterations);
 
     var stride = (2 * Math.PI) / segments;
@@ -202,9 +149,8 @@ class Verly {
       for (x = 0; x < segments; ++x) {
         var px = posx + x * xStride - w / 2 + xStride / 2;
         var py = posy + y * yStride - h / 2 + yStride / 2;
-        
         cloth.addPoint(px, py);
-        
+
         if (x > 0) {
           cloth.addStick(y * segments + x, y * segments + x - 1);
         }
