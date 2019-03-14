@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Verly.js</title>
+  <script src="../src/Vector.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      color: #ce072e;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 10px;
+    }
+
+    canvas {
+      outline: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="c"></canvas>
+
+  <script src="../src/Point.js"></script>
+  <script src="../src/Stick.js"></script>
+  <script src="../src/Entity.js"></script>
+  <script src="../src/Mouse.js"></script>
+  <script src="../src/Verly.js"></script>
+  <script>
+    let canvas = document.getElementById('c');
+    let ctx = canvas.getContext('2d');
+    let width = 600;
+    let height = 500;
+    canvas.width = width;
+    canvas.height = height;
+
+    window.onload = function () {
+
+      let verly = new Verly(16);
+
+      let custom = new Entity(16);
+
+      window.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+
+        return false;
+      })
+      window.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        if (e.button !== 2) return;
+
+        let p = new Point(e.offsetX, e.offsetY);
+        custom.addPoint(p);
+        if (custom.points.length > 1) {
+          custom.addStick(custom.points.length - 2, custom.points.length - 1);
+        }
+      })
+
+      verly.createRagdoll(100, 100, 100, 100);
+      verly.addEntity(custom);
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+
+        verly.update();
+        // verly.renderPointIndex();
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
+</body>
+
+</html>

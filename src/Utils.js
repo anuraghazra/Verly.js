@@ -1,6 +1,7 @@
 let normalizedRandom = function () {
   return Math.random() * 2 - 1;
 };
+
 let random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {
@@ -20,3 +21,7 @@ let random = function (rand, min, max) {
   }
   return rand() * (max - min) + min;
 };
+
+function lerp(a, b, p) {
+  return (b - a) * p + a;
+}

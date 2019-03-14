@@ -90,5 +90,6 @@ class Entity {
     }
     this.renderPoints();
     this.renderSticks();
+    this.render && this.render();
   }
 }

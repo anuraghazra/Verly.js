@@ -103,11 +103,11 @@ class Verly {
   createHexagon(x, y, segments, radius = 50, stride1 = 1, stride2 = 5) {
     const hexagon = new Entity(this.iterations);
 
-    var stride = (2 * Math.PI) / segments;
+    let stride = (2 * Math.PI) / segments;
 
     // points
     for (let i = 0; i < segments; ++i) {
-      var theta = i * stride;
+      let theta = i * stride;
       hexagon.addPoint(
         x + Math.cos(theta) * radius,
         y + Math.sin(theta) * radius,
@@ -141,14 +141,14 @@ class Verly {
   createCloth(posx, posy, w, h, segments, pinOffset) {
     let cloth = new Entity(this.iterations);
 
-    var xStride = w / segments;
-    var yStride = h / segments;
+    let xStride = w / segments;
+    let yStride = h / segments;
 
-    var x, y;
+    let x, y;
     for (y = 0; y < segments; ++y) {
       for (x = 0; x < segments; ++x) {
-        var px = posx + x * xStride - w / 2 + xStride / 2;
-        var py = posy + y * yStride - h / 2 + yStride / 2;
+        let px = posx + x * xStride - w / 2 + xStride / 2;
+        let py = posy + y * yStride - h / 2 + yStride / 2;
         cloth.addPoint(px, py);
 
         if (x > 0) {
@@ -180,7 +180,7 @@ class Verly {
       }
     }
 
-    this.addEntity(cloth);
+    !this.dontPush && this.addEntity(cloth);
     return cloth;
   }
 
@@ -212,7 +212,7 @@ class Verly {
 
     // Head
     // x, y, extremity, gravity, radius
-    // var h = ;
+    // let h = ;
     // h.head = true;
     // h.oldx = x0 + (Math.random() - 0.5) * 25;
 
