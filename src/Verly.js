@@ -8,7 +8,7 @@ class Verly {
 
     this.mouse = new Mouse(this.entities);
   }
-  
+
   /**
    * Joins two Entity Class Together
    * @param  {...Entity} args 
@@ -191,8 +191,9 @@ class Verly {
    * @param {number} y 
    * @param {number} segments=10
    * @param {number} gap=15
+   * @param {number} pin=0
    */
-  createRope(x, y, segments = 10, gap = 15) {
+  createRope(x, y, segments = 10, gap = 15, pin) {
     let rope = new Entity(this.iterations);
 
     for (let i = 0; i < segments; i++) {
@@ -201,6 +202,10 @@ class Verly {
 
     for (let i = 0; i < segments - 1; i++) {
       rope.addStick(i, (i + 1) % segments);
+    }
+
+    if (pin !== undefined) {
+      rope.pin(pin);
     }
     this.addEntity(rope);
     return rope;
