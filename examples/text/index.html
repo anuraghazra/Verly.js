@@ -16,13 +16,16 @@
 
     html,
     body {
-      margin: auto;
-      padding: 10px;
+      margin: 0;
+      padding: 0px;
+    }
+
+    .wrapper {
+      display: flex;
     }
 
     canvas {
-      margin: 0 auto;
-      width: 900px;
+      margin: auto;
       outline: 1px solid black;
     }
   </style>
@@ -30,7 +33,9 @@
 
 <body>
 
-  <canvas id="c"></canvas>
+  <div class="wrapper">
+    <canvas id="c"></canvas>
+  </div>
 
   <script src="../../src/Utils.js"></script>
   <script src="../../src/Point.js"></script>

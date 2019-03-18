@@ -1,7 +1,11 @@
+/**
+ * Verlet Typography
+ * @author <hazru.anurag@gmail.com>
+ */
 let canvas = document.getElementById('c');
 let ctx = canvas.getContext('2d');
 let width = 900;
-let height = 600;
+let height = window.innerHeight - 4;
 canvas.width = width;
 canvas.height = height;
 
@@ -28,7 +32,7 @@ window.onload = function () {
   let rope = verly.createRope(100, 100, 50, 15, 0);
   rope.pin(rope.points.length - 1);
   rope.pin(rope.points.length / 2);
-  let allLetters = [
+  let allEntities = [
     A.text,
     S.text,
     K.text,
@@ -42,14 +46,14 @@ window.onload = function () {
   ]
 
 
-  let mix = verly.joinEntities.apply(verly, allLetters);
+  let mix = verly.joinEntities.apply(verly, allEntities);
 
   mix.addStick(5, 143) //A
   mix.addStick(21, 150) //S
   // mix.addStick(29, 155) //K
   mix.addStick(34, 155) //K
   mix.addStick(48, 160) //B
-  mix.addStick(64, 168, 110) //U
+  mix.addStick(64, 168, 125) //U
   mix.addStick(71, 168) //U
   mix.addStick(85, 174) //D
   mix.addStick(102, 179) //D2

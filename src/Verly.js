@@ -1,5 +1,7 @@
 /**
  * @class Verly
+ * @version 1.0.0
+ * @author <hazru.anurag@gmail.com>
  */
 class Verly {
   constructor(iterations) {
