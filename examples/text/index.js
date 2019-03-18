@@ -5,17 +5,6 @@ let height = 600;
 canvas.width = width;
 canvas.height = height;
 
-function make2dArray(rows, cols) {
-  let arr = new Array(rows);
-  for (let x = 0; x < rows; x++) {
-    arr[x] = [];
-    for (let y = 0; y < cols; y++) {
-      arr[x][y] = 0;
-    }
-  }
-  return arr;
-}
-
 window.onload = function () {
 
   let verly = new Verly(50);
