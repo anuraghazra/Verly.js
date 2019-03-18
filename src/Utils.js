@@ -1,7 +1,10 @@
 let normalizedRandom = function () {
   return Math.random() * 2 - 1;
 };
-
+let degreesToRad = function (degrees) {
+  var pi = Math.PI;
+  return degrees * (pi / 180);
+}
 let random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {

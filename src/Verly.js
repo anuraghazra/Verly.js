@@ -14,7 +14,7 @@ class Verly {
    * @param  {...Entity} args 
    */
   joinEntities(...args) {
-    let mixEntity = new Entity();
+    let mixEntity = new Entity(this.iterations);
 
     let points = [];
     let sticks = [];

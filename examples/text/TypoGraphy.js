@@ -1,0 +1,126 @@
+class TypoGraphy {
+  constructor(x, y, size, letter) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    // A
+    this.A = [
+      [0, 0, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 0, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 1]
+    ]
+    // B
+    this.B = [
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0]
+    ]
+
+    // C
+    this.C = [
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 0, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 0]
+    ]
+
+    // D
+    this.D = [
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 0, 1, 1, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0]
+    ];
+
+    // S
+    this.S = [
+      [0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0]
+    ]
+
+    // I 
+    this.I = [
+      [0, 0, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0]
+    ]
+
+    // K
+    this.K = [
+      [0, 1, 0, 1, 1],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 0, 1, 1]
+    ]
+
+    // E
+    this.E = [
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0]
+    ]
+    
+    // U
+    this.U = [
+      [1, 1, 0, 1, 1],
+      [1, 1, 0, 1, 1],
+      [1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0]
+    ]
+
+    this.letters = {
+      A: this.A,
+      B: this.B,
+      C: this.C,
+      D: this.D,
+      E: this.E,
+      K: this.K,
+      I: this.I,
+      S: this.S,
+      U : this.U
+    }
+
+
+    let gridArray = this.letters[letter];
+
+    this.text = new Entity(50);
+    // this.text.renderPoints = function() {};
+
+    for (let x = 0; x < gridArray.length; x++) {
+      for (let y = 0; y < gridArray[x].length; y++) {
+        if (gridArray[y][x] == 1) {
+          let p = new Point(this.x + x * this.size, this.y + y * this.size);
+          p.setRadius(2);
+          this.text.addPoint(p);
+        }
+      }
+    }
+
+    // join
+    for (let i = 0; i < this.text.points.length; i++) {
+      for (let j = 0; j < this.text.points.length; j++) {
+        if (this.text.points[i] == this.text.points[j]) break;
+        let d = this.text.points[i].pos.dist(this.text.points[j].pos);
+
+        if (d > 0 && d < this.size + 10) {
+          this.text.addStick(i, j);
+        }
+      }
+    }
+  }
+}

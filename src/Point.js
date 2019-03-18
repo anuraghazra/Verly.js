@@ -38,6 +38,12 @@ class Point {
     this.pinned = false;
   }
 
+  rotate(angle, offset) {
+    let x = offset.x + (this.pos.x - offset.x) * Math.cos(angle) - (this.pos.y - offset.y) * Math.sin(angle);
+    let y = offset.y + (this.pos.x - offset.x) * Math.sin(angle) + (this.pos.y - offset.y) * Math.cos(angle);
+    this.pos.setXY(x, y);
+  }
+
   resolveBehaviors(p, radius, strength) {
     var delta = Vector.sub(this.pos, p.pos);
     var dist = delta.magSq();
