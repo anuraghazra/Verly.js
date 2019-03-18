@@ -22,8 +22,31 @@ class Mouse {
       this.down = false;
       this.draggedPoint = null;
     })
+
     canvas.addEventListener('mousemove', (e) => {
       this.coord.setXY(e.offsetX, e.offsetY);
+      this.offsetCoord = Vector.sub(this.coord, this.offset);
+    })
+
+    // TOUCh
+    canvas.addEventListener('touchstart', (e) => {
+      let offset = e.touches[0];
+      this.down = true;
+      if (this.draggedPoint) {
+        this.offset.setXY(offset.clientX - this.draggedPoint.pos.x, offset.clientY - this.draggedPoint.pos.y);
+        this.offsetCoord = Vector.sub(this.coord, this.offset);
+      }
+    })
+    canvas.addEventListener('touchend', (e) => {
+      if (this.draggedPoint) {
+        this.draggedPoint.resetVelocity();
+      };
+      this.down = false;
+      this.draggedPoint = null;
+    })
+    canvas.addEventListener('touchmove', (e) => {
+      let offset = e.touches[0];
+      this.coord.setXY(offset.pageX, offset.pageY);
       this.offsetCoord = Vector.sub(this.coord, this.offset);
     })
   }
