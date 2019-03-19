@@ -5,6 +5,9 @@ let degreesToRad = function (degrees) {
   var pi = Math.PI;
   return degrees * (pi / 180);
 }
+let clamp = function (t, e, i) {
+  return Math.min(Math.max(t, Math.min(e, i)), Math.max(e, i))
+}
 let random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {

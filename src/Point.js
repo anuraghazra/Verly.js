@@ -59,6 +59,11 @@ class Point {
     this.pos.add(f);
   }
 
+  addMotor(x, y, time, radius, speed) {
+    this.pos.x = x + radius * Math.cos(time * speed);
+    this.pos.y = y + radius * Math.sin(time * speed);
+  }
+
   constrain() {
     // if (this.pos.y > height - 1) {
     //   this.pos.y = height - 1;

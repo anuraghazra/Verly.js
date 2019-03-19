@@ -7,7 +7,7 @@ class Verly {
   constructor(iterations) {
     this.entities = [];
     this.iterations = iterations;
-
+    this.currentFrame = 0;
     this.mouse = new Mouse(this.entities);
   }
 
@@ -64,6 +64,7 @@ class Verly {
     }
 
     this.mouse.drag();
+    this.currentFrame++;
   }
 
 

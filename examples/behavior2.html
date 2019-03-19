@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Verly.js</title>
+  <script src="../src/Vector.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      color: #ce072e;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 10px;
+    }
+
+    canvas {
+      outline: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="c"></canvas>
+
+  <script src="../src/Utils.js"></script>
+  <script src="../src/Point.js"></script>
+  <script src="../src/Stick.js"></script>
+  <script src="../src/Entity.js"></script>
+  <script src="../src/Mouse.js"></script>
+  <script src="../src/Verly.js"></script>
+  <script>
+    let canvas = document.getElementById('c');
+    let ctx = canvas.getContext('2d');
+    let width = 600;
+    let height = 600;
+    canvas.width = width;
+    canvas.height = height;
+
+    window.onload = function () {
+
+      let verly = new Verly(16);
+
+      let particle = new Entity();
+      let p1 = new Point(0, 0);
+      let p2 = new Point(0, 0);
+      p1.setRadius(20);
+      p2.setRadius(20);
+      particle.addPoint(p1);
+      particle.addPoint(p2);
+
+      for (let i = 0; i < 400; i++) {
+        particle.addPoint(random(width), random(height));
+      }
+      // particle.addStick(0, 1, 200)
+
+      particle.setGravity(new Vector(0, 0));
+
+      verly.addEntity(particle);
+      p1.setGravity(new Vector(0, 0.0));
+
+      let angle = 0;
+
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particle.points.length; i++) {
+          particle.points[i].resolveBehaviors(particle.points[0], width / 2, -0.8);
+          particle.points[i].resolveBehaviors(particle.points[0], 100, 5);
+          particle.points[i].resolveBehaviors(particle.points[1], width / 2, -0.8);
+          particle.points[i].resolveBehaviors(particle.points[1], 100, 5);
+          for (let j = 0; j < particle.points.length; j++) {
+            if (i !== 0 || i !== 1) {
+              particle.points[i].resolveBehaviors(particle.points[j], p1.radius, 3);
+            }
+          }
+        }
+        verly.update();
+
+        p1.addMotor(200, 200, verly.currentFrame, 100, 0.07);
+        p2.addMotor(350, 350, verly.currentFrame, 100, -0.07);
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+  </script>
+</body>
+
+</html>
