@@ -48,7 +48,7 @@ class Point {
     var delta = Vector.sub(this.pos, p.pos);
     var dist = delta.magSq();
 
-    let magR = (!radius) ? this.radius * this.radius : radius;
+    let magR = (!radius) ? (this.radius * this.radius) : (radius * radius);
     if (dist < magR) {
       var f = delta.normalizeTo(1 - (dist / magR)).mult(strength || this.forceAcc);
       this.applyForce(f);
@@ -69,20 +69,22 @@ class Point {
     // if (this.pos.x > width - 1) {
     //   this.pos.x = width - 1;
     // }
-    let vel = Vector.sub(this.pos, this.oldpos);
+    // let vel = Vector.sub(this.pos, this.oldpos);
     if (this.pos.x > width - this.radius) {
       this.pos.x = width - this.radius;
-      this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
-    } else if (this.pos.x < this.radius) {
+      // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
+    }
+    if (this.pos.x < this.radius) {
       this.pos.x = this.radius;
-      this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
+      // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
     if (this.pos.y > height - this.radius) {
       this.pos.y = height - this.radius;
-      this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
-    } else if (this.pos.y < this.radius) {
+      // this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
+    }
+    if (this.pos.y < this.radius) {
       this.pos.y = this.radius;
-      this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
+      // this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
     }
   };
 

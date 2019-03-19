@@ -20,24 +20,52 @@ window.onload = function () {
 
   let verly = new Verly(16);
 
-  let box = verly.createBox(100, 200, 100, 100);
 
+  let particle = new Entity();
 
-  let cloth = verly.createCloth(200, 200, 200, 200, 10, 9);
+  let p1 = new Point(200, 200);
+  p1.setRadius(20);
+  let p2 = new Point(200, 200);
+  p2.setRadius(20);
+  particle.addPoint(p1);
+  particle.addPoint(p2);
 
+  for (let i = 0; i < 400; i++) {
+    particle.addPoint(random(width), random(height));
+  }
+  particle.addStick(0, 1, 200)
 
-  let mouse = new Vector();
-  window.addEventListener('mousemove', function (e) {
-    mouse = new Vector(e.offsetX, e.offsetY);
-  })
+  particle.setGravity(new Vector(0, 0));
 
-
+  verly.addEntity(particle);
+  p1.setGravity(new Vector(0, 0.0));
+  
+  let angle = 0;
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
+    angle += 1
+    // particle.update();
+    for (let i = 0; i < particle.points.length; i++) {
+      if (i !== 0 || i !== 1) {
+        particle.points[i].pos.jitter(0.5)
+      }
+      particle.points[i].resolveBehaviors(particle.points[0], width / 2, -0.8);
+      particle.points[i].resolveBehaviors(particle.points[0], 100, 5);
+      particle.points[i].resolveBehaviors(particle.points[1], width / 2, -0.8);
+      particle.points[i].resolveBehaviors(particle.points[1], 100, 5);
+      for (let j = 0; j < particle.points.length; j++) {
+        if (i !== 0 || i !== 1) {
+          particle.points[i].resolveBehaviors(particle.points[j], p1.radius, 3);
+        }
+      }
+    }
     verly.update();
 
-    box.setGravity(new Vector((mouse.x - box.points[0].pos.x - 50) / 500, (mouse.y - box.points[0].pos.y - 50) / 500));
+    p1.pos.x = 200 + 50 * Math.cos(angle * 0.1);
+    p1.pos.y = 200 + 50 * Math.sin(angle * 0.1);
+    p2.pos.x = 350 + 100 * Math.cos(angle * -0.1);
+    p2.pos.y = 350 + 100 * Math.sin(angle * -0.1);
     // verly.renderPointIndex();
 
     requestAnimationFrame(animate);

@@ -51,7 +51,7 @@
       let mouse = new Point(0, 0);
       mouse.setForceAcc(-30);
       mouse.setRadius(100);
-      let mBehavior = 5;
+      let mBehavior = 2;
       window.addEventListener('mousemove', (e) => {
         if (e.altKey) {
           addParticles(e.offsetX, e.offsetY);
@@ -90,10 +90,10 @@
         for (let i = 0; i < particles.points.length; i++) {
           for (let j = 0; j < particles.points.length; j++) {
             if (particles.points[i] !== particles.points[j]) {
-              particles.points[j].resolveBehaviors(particles.points[i], 20 * 90, 1)
+              particles.points[j].resolveBehaviors(particles.points[i], 20, 2)
             }
           }
-          particles.points[i].resolveBehaviors(mouse, mouse.radius * mouse.radius, mBehavior)
+          particles.points[i].resolveBehaviors(mouse, mouse.radius, mBehavior)
         }
 
         verly.update();
