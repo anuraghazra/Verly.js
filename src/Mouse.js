@@ -28,7 +28,7 @@ class Mouse {
       this.offsetCoord = Vector.sub(this.coord, this.offset);
     })
 
-    // TOUCh
+    // TOUCH
     canvas.addEventListener('touchstart', (e) => {
       let offset = e.touches[0];
       this.down = true;

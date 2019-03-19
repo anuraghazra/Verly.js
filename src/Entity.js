@@ -5,6 +5,12 @@ class Entity {
     this.iterations = iterations || 16;
   }
 
+  setGravity(g) {
+    for (let i = 0; i < this.points.length; i++) {
+      this.points[i].setGravity(g);
+    }
+  }
+
   pin(index) {
     this.points[index].pin();
   }
