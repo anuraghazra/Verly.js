@@ -5,7 +5,7 @@ Easy to integrate verlet physics engine.
 > - Yet another physics engine? really?
 > - Yes because i love physics :heart:.
 
-### Check out [examples]('https://anuraghazra.github.io/Verly.js/examples/').
+Check out [examples]('https://anuraghazra.github.io/Verly.js/examples/')
 
 ## Installation
 
