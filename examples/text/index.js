@@ -56,10 +56,9 @@ window.onload = function () {
   mix.addStick(64, 168, 125) //U
   mix.addStick(71, 168) //U
   mix.addStick(85, 174) //D
-  mix.addStick(102, 179) //D2
-  mix.addStick(118, 184) //I
-  mix.addStick(127, 188) //E
-  mix.addStick(137, 188) //E
+  mix.addStick(103, 179) //D2
+  mix.addStick(120, 184) //I
+  mix.addStick(134, 188) //E
   
 
   function animate() {

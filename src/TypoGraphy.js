@@ -3,6 +3,8 @@ class TypoGraphy {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.stickDistance = this.size;
+    this.iterations = 50;
     // A
     this.A = [
       [0, 0, 1, 0, 0],
@@ -13,11 +15,11 @@ class TypoGraphy {
     ]
     // B
     this.B = [
-      [0, 1, 1, 1, 0],
-      [0, 1, 1, 1, 1],
-      [0, 1, 1, 1, 0],
-      [0, 1, 1, 1, 1],
-      [0, 1, 1, 1, 0]
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0]
     ]
 
     // C
@@ -33,10 +35,19 @@ class TypoGraphy {
     this.D = [
       [1, 1, 1, 0, 0],
       [1, 1, 1, 1, 0],
-      [1, 0, 1, 1, 0],
+      [1, 1, 1, 1, 0],
       [1, 1, 1, 1, 0],
       [1, 1, 1, 0, 0]
     ];
+
+    // E
+    this.E = [
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0]
+    ]
 
     // S
     this.S = [
@@ -56,24 +67,16 @@ class TypoGraphy {
       [0, 1, 1, 1, 0]
     ]
 
+
     // K
     this.K = [
-      [0, 1, 0, 1, 1],
-      [0, 1, 1, 1, 0],
-      [0, 1, 1, 0, 0],
-      [0, 1, 1, 1, 0],
-      [0, 1, 0, 1, 1]
+      [1, 0, 1, 1, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 0, 0, 0],
+      [1, 1, 1, 0, 0],
+      [1, 0, 1, 1, 0]
     ]
 
-    // E
-    this.E = [
-      [0, 1, 1, 1, 0],
-      [0, 1, 1, 0, 0],
-      [0, 1, 1, 1, 0],
-      [0, 1, 1, 0, 0],
-      [0, 1, 1, 1, 0]
-    ]
-    
     // U
     this.U = [
       [1, 1, 0, 1, 1],
@@ -81,6 +84,70 @@ class TypoGraphy {
       [1, 1, 0, 1, 1],
       [1, 1, 1, 1, 1],
       [0, 1, 1, 1, 0]
+    ]
+
+    // N
+    this.N = [
+      [0, 0, 0, 0, 0, 0],
+      [1, 1, 0, 0, 1, 1],
+      [1, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 1, 1],
+      [1, 1, 0, 0, 1, 1]
+    ]
+
+    // R
+    this.R = [
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0]
+    ]
+
+    // G
+    this.G = [
+      [0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0]
+    ]
+
+    // L
+    this.L = [
+      [1, 1, 0, 0, 0],
+      [1, 1, 0, 0, 0],
+      [1, 1, 0, 0, 0],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1]
+    ]
+
+    // Y
+    this.Y = [
+      [1, 1, 0, 1, 1],
+      [1, 1, 0, 1, 1],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 1, 0]
+    ]
+
+    // V
+    this.V = [
+      [1, 0, 0, 0, 1],
+      [1, 1, 0, 1, 1],
+      [1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0]
+    ]
+
+    //X
+    this.X = [
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1]
     ]
 
     this.letters = {
@@ -92,13 +159,20 @@ class TypoGraphy {
       K: this.K,
       I: this.I,
       S: this.S,
-      U : this.U
+      U: this.U,
+      N: this.N,
+      R: this.R,
+      G: this.G,
+      L: this.L,
+      Y: this.Y,
+      V: this.V,
+      X: this.X,
     }
 
 
     let gridArray = this.letters[letter];
 
-    this.text = new Entity(50);
+    this.text = new Entity(this.iterations);
     // this.text.renderPoints = function() {};
 
     for (let x = 0; x < gridArray.length; x++) {
@@ -117,7 +191,7 @@ class TypoGraphy {
         if (this.text.points[i] == this.text.points[j]) break;
         let d = this.text.points[i].pos.dist(this.text.points[j].pos);
 
-        if (d > 0 && d < this.size + 10) {
+        if (d > 0 && d < this.size + this.stickDistance) {
           this.text.addStick(i, j);
         }
       }

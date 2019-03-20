@@ -5,6 +5,28 @@ class Entity {
     this.iterations = iterations || 16;
   }
 
+
+  // join(...args) {
+  //   let points = [];
+  //   let sticks = [];
+
+  //   // loop through the args and push points and sticks to the array
+  //   for (let i = 0; i < args.length; i++) {
+  //     points.push(args[i].points);
+  //     sticks.push(args[i].sticks);
+  //   }
+
+  //   // join multiple arrays
+  //   points = [].concat.apply([], points);
+  //   sticks = [].concat.apply([], sticks);
+
+  //   // add the arrays to the mix::Entity
+  //   this.points = points;
+  //   this.sticks = sticks;
+
+  //   return this; // return for chaining
+  // }
+
   setGravity(g) {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].setGravity(g);
@@ -65,7 +87,7 @@ class Entity {
       this.points[i].render();
     }
   }
-  
+
   updateContrains() {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].constrain();
@@ -88,10 +110,10 @@ class Entity {
   }
 
   update() {
-    var stepCoef = 1 / this.iterations;
+    // var stepCoef = 1 / this.iterations;
     this.updatePoints();
     for (let j = 0; j < this.iterations; ++j) {
-      this.updateSticks(stepCoef);
+      this.updateSticks();
       this.updateContrains();
     }
     this.renderPoints();

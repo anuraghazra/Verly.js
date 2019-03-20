@@ -41,7 +41,7 @@
     let canvas = document.getElementById('c');
     let ctx = canvas.getContext('2d');
     let width = 600;
-    let height = 600;
+    let height = 500;
     canvas.width = width;
     canvas.height = height;
 
@@ -97,7 +97,7 @@
         }
       }
 
-      let cloth = new Cloth(300, 100, 500, 500, 25, 2);
+      let cloth = new Cloth(300, 100, 500, 400, 25, 2);
       verly.addEntity(cloth);
 
       function animate() {
