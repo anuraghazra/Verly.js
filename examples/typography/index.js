@@ -12,11 +12,18 @@ canvas.height = height;
 window.onload = function () {
   let verly = new Verly(50);
 
-  var url = new URL(window.location.href);
-  var query_string = url.search;
-  var search_params = new URLSearchParams(query_string);
-  var urlText = search_params.get('text') || 'HAPPY';
-  var urlText2 = search_params.get('text2') || 'HOLI';
+  // URL = undefined;
+
+  let urlText = 'HAPPY';
+  let urlText2 = 'HOLI';
+  // check support
+  if ('URL' in window && URL !== undefined) {
+    let url = new URL(window.location.href);
+    let query_string = url.search;
+    let search_params = new URLSearchParams(query_string);
+    urlText = search_params.get('text') || 'HAPPY';
+    urlText2 = search_params.get('text2') || 'HOLI';
+  }
 
   let word = new Text(urlText, 50, 100, 25);
   let word2 = new Text(urlText2, 700, 100, 25);
