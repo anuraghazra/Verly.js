@@ -4,7 +4,7 @@ class Point {
     this.oldpos = new Vector(x + (vx || 0), y + (vy || 0));
     this.bounce = 0.99;
     this.friction = 0.97;
-    this.groundFriction = 0.8;
+    this.groundFriction = 0.7;
     this.gravity = new Vector(0, 1);
     this.pinned = false;
     this.radius = radius || 5;
