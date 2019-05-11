@@ -11,27 +11,27 @@ let RIGHT_ARROW = false;
 let LEFT_ARROW = false;
 let UP_ARROW = false;
 window.addEventListener('keydown', function (e) {
-  switch (e.key) {
-    case 'd':
+  switch (e.keyCode) {
+    case 68:
       RIGHT_ARROW = true;
       break;
-    case 'a':
+    case 65:
       LEFT_ARROW = true;
       break;
-    case 'w':
+    case 87:
       UP_ARROW = true;
       break;
   }
 })
 window.addEventListener('keyup', function (e) {
-  switch (e.key) {
-    case 'd':
+  switch (e.keyCode) {
+    case 68:
       RIGHT_ARROW = false;
       break;
-    case 'a':
+    case 65:
       LEFT_ARROW = false;
       break;
-    case 'w':
+    case 87:
       UP_ARROW = false;
       break;
   }
@@ -50,7 +50,7 @@ window.onload = function () {
   let BOX_POINTS = boxtmp.points.length;
 
   window.addEventListener('keydown', function (e) {
-    if (e.key == ' ') {
+    if (e.keyCode == 32) {
       for (let i = 0; i < word.entity.points.length; i++) {
         let d = word.entity.points[i].pos.dist(ship.pos);
         if (d > 0 && d < 50) {
@@ -60,7 +60,7 @@ window.onload = function () {
         }
       }
     }
-    if (e.key == 'q' && boxtmp.points.length < BOX_POINTS) {
+    if (e.keyCode == 81 && boxtmp.points.length < BOX_POINTS) {
       BOX_POINTS--;
       boxtmp.sticks.pop();
     }
