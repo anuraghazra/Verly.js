@@ -8,12 +8,27 @@ window.onload = function () {
 
   let verly = new Verly(16, canvas, ctx);
 
-  let cloth = verly.createCloth(200, 200, 300, 300, 20, 2);
-  // let ragdoll = verly.createRagdoll(100, 100);
-  verly.createBox(100, 100, 100, 100);
-  
+  let hexagon = verly.createHexagon(100, 100, 12, 50);
+  let hexagon2 = verly.createHexagon(200, 200, 12, 30);
+  let rope = verly.createRope(150, 150, 15, 20);
+
+  let mix = verly.joinEntities(hexagon2, hexagon, rope);
+  mix.addStick(12, 40, 10);
+  mix.addStick(25, 26, 10);
+  hexagon.setGravity(new Vector(0, -0.8))
+
+  // class Vox extends Entity.Rope {
+  //   constructor() {
+  //     super()
+
+
+  //   }
+  // }
+
+
   function animate() {
     ctx.clearRect(0, 0, width, height);
+
 
     verly.update();
     verly.render();

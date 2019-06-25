@@ -1,4 +1,11 @@
+/**
+ * @class Entity
+ */
 class Entity {
+  /**
+   * 
+   * @param {Number} iterations 
+   */
   constructor(iterations) {
     this.points = [];
     this.sticks = [];
@@ -27,21 +34,38 @@ class Entity {
   //   return this; // return for chaining
   // }
 
+  /**
+   * @method setGravity
+   * @param {Vector} g 
+   */
   setGravity(g) {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].setGravity(g);
     }
   }
 
+  /**
+   * @method pin
+   * @param {Number} index 
+   */
   pin(index) {
     this.points[index].pin();
   }
 
+  /**
+   * @method removeSticks
+   * @param {Point} p
+   */
   removeSticks(p) {
     this.sticks.splice(this.sticks.indexOf(p.sticks[0]), 1);
     p.sticks.splice(0, 1);
   }
-
+  
+  /**
+   * @method setVelocity
+   * @param {Number} x 
+   * @param {Number} y 
+   */
   setVelocity(x, y) {
     this.points.map(e => {
       e.oldpos.x += x;
@@ -49,6 +73,15 @@ class Entity {
     })
   }
 
+  /**
+   * @ethod addPoint
+   * @param {Number|Point} x 
+   * @param {Number?} y 
+   * @param {Number?} vx 
+   * @param {Number?} vy 
+   * @param {Number?} radius 
+   * @description adds a Point in points array with {x,y,vx,vy,radius}
+   */
   addPoint(x, y, vx, vy, radius) {
     let p
     if (x instanceof Point) {
@@ -60,46 +93,71 @@ class Entity {
     return p;
   }
 
+  /**
+   * 
+   * @param {Number|Stick} p1 
+   * @param {Number} p2 
+   * @param {Number} length 
+   */
   addStick(p1, p2, length) {
-    let s;
+    // let s;
+    // return s;
     if (p1 instanceof Stick) {
       this.sticks.push(p1);
     } else {
       this.sticks.push(new Stick(this.points[p1], this.points[p2], length));
     }
-    return s;
   }
 
+  /**
+   * @method updatePoints
+   */
   updatePoints() {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].update();
     }
   }
 
+  /**
+   * @methdo updateSticks
+   * @param {Number} stepCoef 
+   */
   updateSticks(stepCoef) {
     for (let i = 0; i < this.sticks.length; i++) {
       this.sticks[i].update(stepCoef);
     }
   }
 
+  /**
+   * @method renderPoints
+   */
   renderPoints() {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].render();
     }
   }
 
+  /**
+   * @method updateContrains
+   */
   updateContrains() {
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].constrain();
     }
   }
 
+  /**
+   * @method renderSticks
+   */
   renderSticks() {
     for (let i = 0; i < this.sticks.length; i++) {
       this.sticks[i].render();
     }
   }
 
+  /**
+   * @method renderPointsIndex
+   */
   renderPointsIndex() {
     for (let i = 0; i < this.points.length; i++) {
       ctx.beginPath();
@@ -109,6 +167,9 @@ class Entity {
     }
   }
 
+  /**
+   * @method update
+   */
   update() {
     // var stepCoef = 1 / this.iterations;
     this.updatePoints();
@@ -116,8 +177,12 @@ class Entity {
       this.updateSticks();
       this.updateContrains();
     }
+  }
+  /**
+   * @method render
+   */
+  render() {
     this.renderPoints();
     this.renderSticks();
-    this.render && this.render();
   }
 }

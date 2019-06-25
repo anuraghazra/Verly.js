@@ -65,26 +65,26 @@ class Point {
   }
 
   constrain() {
-    // if (this.pos.y > height - 1) {
-    //   this.pos.y = height - 1;
+    // if (this.pos.y > HEIGHT - 1) {
+    //   this.pos.y = HEIGHT - 1;
     // }
     // if (this.pos.x < 0) {
     //   this.pos.x = 0;
     // }
-    // if (this.pos.x > width - 1) {
-    //   this.pos.x = width - 1;
+    // if (this.pos.x > WIDTH - 1) {
+    //   this.pos.x = WIDTH - 1;
     // }
     // let vel = Vector.sub(this.pos, this.oldpos);
-    if (this.pos.x > width - this.radius) {
-      this.pos.x = width - this.radius;
+    if (this.pos.x > WIDTH - this.radius) {
+      this.pos.x = WIDTH - this.radius;
       // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
     if (this.pos.x < this.radius) {
       this.pos.x = this.radius;
       // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
-    if (this.pos.y > height - this.radius) {
-      this.pos.y = height - this.radius;
+    if (this.pos.y > HEIGHT - this.radius) {
+      this.pos.y = HEIGHT - this.radius;
       // this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
     }
     if (this.pos.y < this.radius) {
@@ -99,7 +99,7 @@ class Point {
     let vel = Vector.sub(this.pos, this.oldpos);
     vel.mult(this.friction);
     // if the point touches the ground set groundFriction
-    if (this.pos.y >= height - this.radius && vel.magSq() > 0.000001) {
+    if (this.pos.y >= HEIGHT - this.radius && vel.magSq() > 0.000001) {
       var m = vel.mag();
       vel.x /= m;
       vel.y /= m;

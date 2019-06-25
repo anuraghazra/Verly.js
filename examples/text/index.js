@@ -2,16 +2,16 @@
  * Verlet Typography
  * @author <hazru.anurag@gmail.com>
  */
-let canvas = document.getElementById('c');
-let ctx = canvas.getContext('2d');
-let width = 900;
-let height = window.innerHeight - 4;
-canvas.width = width;
-canvas.height = height;
 
 window.onload = function () {
+  let canvas = document.getElementById('c');
+  let ctx = canvas.getContext('2d');
+  let width = 900;
+  let height = window.innerHeight - 4;
+  canvas.width = width;
+  canvas.height = height;
 
-  let verly = new Verly(50);
+  let verly = new Verly(50, canvas, ctx);
 
   // ASKBUDDIE
   let center = height / 2 - 100;
@@ -27,7 +27,7 @@ window.onload = function () {
   let I = new TypoGraphy(offsetX + 600, center, 20, 'I');
   let E = new TypoGraphy(offsetX + 670, center, 20, 'E');
 
-  
+
   // verly.createCloth(200, 200, 200, 200, 10, 3)
   let rope = verly.createRope(100, 100, 50, 15, 0);
   rope.pin(rope.points.length - 1);
@@ -59,12 +59,14 @@ window.onload = function () {
   mix.addStick(103, 179) //D2
   mix.addStick(120, 184) //I
   mix.addStick(134, 188) //E
-  
+
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
     verly.update();
+    verly.render();
+    verly.interact();
     // verly.renderPointIndex();
 
     requestAnimationFrame(animate);

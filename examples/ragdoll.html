@@ -36,16 +36,18 @@
   <script src="../src/Mouse.js"></script>
   <script src="../src/Verly.js"></script>
   <script>
-    let canvas = document.getElementById('c');
-    let ctx = canvas.getContext('2d');
-    let width = 600;
-    let height = 500;
-    canvas.width = width;
-    canvas.height = height;
 
 
     window.onload = function () {
-      let verly = new Verly(8);
+      let canvas = document.getElementById('c');
+      let ctx = canvas.getContext('2d');
+      let width = 600;
+      let height = 500;
+      canvas.width = width;
+      canvas.height = height;
+      
+      let verly = new Verly(8, canvas, ctx);
+
       let rag = verly.createRagdoll(150, 150);
       let hexa = verly.createHexagon(200, 100, 16, 30);
       let hexa2 = verly.createHexagon(200, 100, 16, 30);
@@ -56,7 +58,11 @@
 
       function animate() {
         ctx.clearRect(0, 0, width, height);
+        
         verly.update();
+        verly.render();
+        verly.interact();
+        
         requestAnimationFrame(animate);
       }
       animate();

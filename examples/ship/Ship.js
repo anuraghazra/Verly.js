@@ -1,8 +1,9 @@
 
 class Ship extends Point {
-  constructor(x, y, vx, vy, radius) {
+  constructor(x, y, vx, vy, radius, canvas) {
     super(x, y, vx, vy, radius);
-    this.pos = new Vector(100, height / 2);
+    this.canvas = canvas;
+    this.pos = new Vector(100, this.canvas.height / 2);
     this.r = 10;
     this.heading = 0;
     this.rotation = 0;
@@ -61,17 +62,17 @@ class Ship extends Point {
     ctx.restore();
   };
   edges() {
-    if (this.pos.x > width + this.r) {
+    if (this.pos.x > this.canvas.width + this.r) {
       this.pos.x = -this.r;
     }
     else if (this.pos.x < -this.r) {
-      this.pos.x = width + this.r;
+      this.pos.x = this.canvas.width + this.r;
     }
-    if (this.pos.y > height + this.r) {
+    if (this.pos.y > this.canvas.height + this.r) {
       this.pos.y = -this.r;
     }
     else if (this.pos.y < -this.r) {
-      this.pos.y = height + this.r;
+      this.pos.y = this.canvas.height + this.r;
     }
   };
   setRotation(a) {

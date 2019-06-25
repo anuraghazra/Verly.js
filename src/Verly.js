@@ -4,11 +4,15 @@
  * @author <hazru.anurag@gmail.com>
  */
 class Verly {
-  constructor(iterations) {
+  constructor(iterations, canvas, ctx) {
     this.entities = [];
     this.iterations = iterations;
     this.currentFrame = 0;
-    this.mouse = new Mouse(this.entities);
+    this.canvas = canvas;
+    window.WIDTH = canvas.width;
+    window.HEIGHT = canvas.height;
+    window.ctx = ctx;
+    this.mouse = new Mouse(this.entities, this.canvas);
   }
 
   /**
@@ -54,6 +58,15 @@ class Verly {
     }
   }
 
+    
+  /**
+   * @method interact
+   * drags points
+   */
+  interact() {
+    this.mouse.drag();
+  }
+
   /**
    * @method update
    * updates all the physics stuff
@@ -63,8 +76,17 @@ class Verly {
       this.entities[i].update();
     }
 
-    this.mouse.drag();
     this.currentFrame++;
+  }
+  
+  /**
+   * @method render
+   * renders all the entity
+   */
+  render() {
+    for (let i = 0; i < this.entities.length; i++) {
+      this.entities[i].render();
+    }
   }
 
 

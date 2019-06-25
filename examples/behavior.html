@@ -37,20 +37,22 @@
   <script src="../src/Mouse.js"></script>
   <script src="../src/Verly.js"></script>
   <script>
-    let canvas = document.getElementById('c');
-    let ctx = canvas.getContext('2d');
-    let width = 600;
-    let height = 500;
-    canvas.width = width;
-    canvas.height = height;
 
     window.onload = function () {
+      let canvas = document.getElementById('c');
+      let ctx = canvas.getContext('2d');
+      let width = 600;
+      let height = 500;
+      canvas.width = width;
+      canvas.height = height;
 
-      let verly = new Verly(16);
+      let verly = new Verly(16, canvas, ctx);
 
       let mouse = new Point(0, 0);
       mouse.setForceAcc(-30);
       mouse.setRadius(100);
+
+      
       let mBehavior = 2;
       window.addEventListener('mousemove', (e) => {
         if (e.altKey) {
@@ -68,8 +70,6 @@
       })
 
 
-
-      
       let particles = new Entity();
       function addParticles(x, y) {
         let p = new Point(x, y);
@@ -97,6 +97,8 @@
         }
 
         verly.update();
+        verly.render();
+        verly.interact();
 
         // verly.renderPointIndex();
 

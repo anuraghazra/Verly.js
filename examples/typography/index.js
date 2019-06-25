@@ -2,15 +2,15 @@
  * Verlet Typography
  * @author <hazru.anurag@gmail.com>
  */
-let canvas = document.getElementById('c');
-let ctx = canvas.getContext('2d');
-let width = 1200;
-let height = 500;
-canvas.width = width;
-canvas.height = height;
 
 window.onload = function () {
-  let verly = new Verly(50);
+  let canvas = document.getElementById('c');
+  let ctx = canvas.getContext('2d');
+  let width = 1200;
+  let height = 500;
+  canvas.width = width;
+  canvas.height = height;
+  let verly = new Verly(50, canvas, ctx);
 
   // URL = undefined;
 
@@ -37,6 +37,8 @@ window.onload = function () {
     ctx.clearRect(0, 0, width, height);
 
     verly.update();
+    verly.render();
+    verly.interact();
     // word.entity.renderPointsIndex()
     // verly.renderPointIndex();
     // word.entity.renderPointIndex();

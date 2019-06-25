@@ -37,16 +37,16 @@
   <script src="../src/Mouse.js"></script>
   <script src="../src/Verly.js"></script>
   <script>
-    let canvas = document.getElementById('c');
-    let ctx = canvas.getContext('2d');
-    let width = 600;
-    let height = 600;
-    canvas.width = width;
-    canvas.height = height;
 
     window.onload = function () {
+      let canvas = document.getElementById('c');
+      let ctx = canvas.getContext('2d');
+      let width = 600;
+      let height = 600;
+      canvas.width = width;
+      canvas.height = height;
 
-      let verly = new Verly(16);
+      let verly = new Verly(16, canvas, ctx);
 
       let particle = new Entity();
       let p1 = new Point(0, 0);
@@ -84,6 +84,9 @@
           }
         }
         verly.update();
+        verly.render();
+        verly.interact();
+
 
         p1.addMotor(200, 200, verly.currentFrame, 100, 0.07);
         p2.addMotor(350, 350, verly.currentFrame, 100, -0.07);

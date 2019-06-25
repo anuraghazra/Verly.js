@@ -1,5 +1,5 @@
 class Mouse {
-  constructor(entities) {
+  constructor(entities, canvas) {
     this.entities = entities;
     // Drag Interaction
     this.draggedPoint = null;
@@ -7,15 +7,16 @@ class Mouse {
     this.coord = new Vector();
     this.offset = new Vector();
     this.offsetCoord = new Vector();
+    this.canvas = canvas;
 
-    canvas.addEventListener('mousedown', (e) => {
+    this.canvas.addEventListener('mousedown', (e) => {
       this.down = true;
       if (this.draggedPoint) {
         this.offset.setXY(e.offsetX - this.draggedPoint.pos.x, e.offsetY - this.draggedPoint.pos.y);
         this.offsetCoord = Vector.sub(this.coord, this.offset);
       }
     })
-    canvas.addEventListener('mouseup', (e) => {
+    this.canvas.addEventListener('mouseup', (e) => {
       if (this.draggedPoint) {
         this.draggedPoint.resetVelocity();
       };
@@ -23,13 +24,13 @@ class Mouse {
       this.draggedPoint = null;
     })
 
-    canvas.addEventListener('mousemove', (e) => {
+    this.canvas.addEventListener('mousemove', (e) => {
       this.coord.setXY(e.offsetX, e.offsetY);
       this.offsetCoord = Vector.sub(this.coord, this.offset);
     })
 
     // TOUCH
-    canvas.addEventListener('touchstart', (e) => {
+    this.canvas.addEventListener('touchstart', (e) => {
       let offset = e.touches[0];
       this.down = true;
       if (this.draggedPoint) {
@@ -37,14 +38,14 @@ class Mouse {
         this.offsetCoord = Vector.sub(this.coord, this.offset);
       }
     })
-    canvas.addEventListener('touchend', (e) => {
+    this.canvas.addEventListener('touchend', (e) => {
       if (this.draggedPoint) {
         this.draggedPoint.resetVelocity();
       };
       this.down = false;
       this.draggedPoint = null;
     })
-    canvas.addEventListener('touchmove', (e) => {
+    this.canvas.addEventListener('touchmove', (e) => {
       let offset = e.touches[0];
       this.coord.setXY(offset.pageX, offset.pageY);
       this.offsetCoord = Vector.sub(this.coord, this.offset);
@@ -65,6 +66,7 @@ class Mouse {
       this.dragPoint();
     }
   }
+  
   renderDraggedPoint(point) {
     ctx.beginPath();
     ctx.strokeStyle = 'black';

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Verly.js</title>
-  <script src="./src/Vector.js"></script>
+  <script src="../src/Vector.js"></script>
 
   <style>
     * {
@@ -30,29 +30,30 @@
 
   <canvas id="c"></canvas>
 
-  <script src="./src/Utils.js"></script>
-  <script src="./src/Point.js"></script>
-  <script src="./src/Stick.js"></script>
-  <script src="./src/Entity.js"></script>
-  <script src="./src/Mouse.js"></script>
-  <script src="./src/Verly.js"></script>
-  <script src="./src/Objects.js"></script>
+  <script src="../src/Utils.js"></script>
+  <script src="../src/Point.js"></script>
+  <script src="../src/Stick.js"></script>
+  <script src="../src/Entity.js"></script>
+  <script src="../src/Mouse.js"></script>
+  <script src="../src/Verly.js"></script>
+  <script src="../src/Objects.js"></script>
   <script>
-    let canvas = document.getElementById('c');
-    let ctx = canvas.getContext('2d');
-    let width = 600;
-    let height = 600;
-    canvas.width = width;
-    canvas.height = height;
 
     window.onload = function () {
+      let canvas = document.getElementById('c');
+      let ctx = canvas.getContext('2d');
+      let width = 600;
+      let height = 600;
+      canvas.width = width;
+      canvas.height = height;
 
-      let verly = new Verly(16);
+      let verly = new Verly(16, canvas, ctx);
 
       let b1 = new Box(200, 110, 20, 100);
-      verly.addEntity(b1._box);
+      b1.setGravity(new Vector())
+      verly.addEntity(b1);
 
-      for (p of b1._box.points) {
+      for (p of b1.points) {
         let absSize = new Vector(b1.width / 2, b1.height / 2);
         let boxcenter = new Vector(b1.x - absSize.x, b1.y - absSize.y);
         let rot = degreesToRad(25);
@@ -61,8 +62,10 @@
       }
 
       let b2 = new Box(150, 125, 20, 100);
-      verly.addEntity(b2._box);
-      for (p of b2._box.points) {
+      b2.setGravity(new Vector())
+      verly.addEntity(b2);
+
+      for (p of b2.points) {
         let absSize = new Vector(b2.width / 2, b2.height / 2);
         let boxcenter = new Vector(b2.x - absSize.x, b2.y - absSize.y);
         let rot = degreesToRad(-25);
@@ -74,6 +77,8 @@
         ctx.clearRect(0, 0, width, height);
 
         verly.update();
+        verly.render();
+        verly.interact();
         // verly.renderPointIndex();
 
         requestAnimationFrame(animate);
