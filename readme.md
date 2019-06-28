@@ -5,7 +5,14 @@ Easy to integrate verlet physics engine.
 > - Yet another physics engine? really?
 > - Yes because i love physics :heart:.
 
-Check out [examples](https://anuraghazra.github.io/Verly.js/examples/)
+**Check out all [examples](https://anuraghazra.github.io/Verly.js/examples/)**
+
+## cool things made with Verly.js
+- [ship](https://anuraghazra.github.io/Verly.js/examples/ship/)
+- [parasites](https://anuraghazra.github.io/Verly.js/parasites/)
+- [text](https://anuraghazra.github.io/Verly.js/examples/text/)
+- [happy holi](https://anuraghazra.github.io/Verly.js/examples/typography/)
+
 
 ## Installation
 
@@ -13,20 +20,35 @@ Check out [examples](https://anuraghazra.github.io/Verly.js/examples/)
 git clone https://github.com/anuraghazra/Verly.js.git
 ```
 
+## local development
 
-## Usage
+after cloning the repo in command line run to build
+```bash
+npm install && npm run build
+```
+
+
+
+
+# Usage
+
+## import CDN link
+```html
+<!-- add this to head -->
+<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.3/dist/verly.bundle.js"></script>
+```
 
 ```js
-  let canvas = document.getElementById('c');
-  let ctx = canvas.getContext('2d');
-  let width = 600;
-  let height = 600;
-  canvas.width = width;
-  canvas.height = height;
-
   window.onload = function () {
+    let canvas = document.getElementById('c');
+    let ctx = canvas.getContext('2d');
+    let width = 600;
+    let height = 600;
+    canvas.width = width;
+    canvas.height = height;
 
-    let verly = new Verly(16);
+    // iteration, canvas, ctx
+    let verly = new Verly(16, canvas, ctx);
 
     // x, y, w, h
     verly.createBox(20, 100, 100, 100);
@@ -43,6 +65,10 @@ git clone https://github.com/anuraghazra/Verly.js.git
       ctx.clearRect(0, 0, width, height);
 
       verly.update();
+      verly.render();
+
+      // for interacting with points
+      verly.interact();
       
       requestAnimationFrame(animate);
     }
