@@ -1,4 +1,4 @@
-class Stick {
+export default class Stick {
   constructor(p1, p2, length, stiffness) {
     this.startPoint = p1;
     this.endPoint = p2;

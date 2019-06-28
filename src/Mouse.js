@@ -1,4 +1,4 @@
-class Mouse {
+export default class Mouse {
   constructor(entities, canvas) {
     this.entities = entities;
     // Drag Interaction

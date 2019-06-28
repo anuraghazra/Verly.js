@@ -1,0 +1,33 @@
+{
+  "name": "verlyjs",
+  "version": "1.1.3",
+  "description": "Easy to integrate verlet physics engine",
+  "main": "server.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuraghazra/Verly.js.git"
+  },
+  "keywords": [
+    "verlet",
+    "physics",
+    "engine"
+  ],
+  "author": "Anurag Hazra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anuraghazra/Verly.js/issues"
+  },
+  "homepage": "https://github.com/anuraghazra/Verly.js#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
+  }
+}

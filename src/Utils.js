@@ -1,14 +1,14 @@
-let normalizedRandom = function () {
+window.normalizedRandom = function () {
   return Math.random() * 2 - 1;
 };
-let degreesToRad = function (degrees) {
+window.degreesToRad = function (degrees) {
   var pi = Math.PI;
   return degrees * (pi / 180);
 }
-let clamp = function (t, e, i) {
+window.clamp = function (t, e, i) {
   return Math.min(Math.max(t, Math.min(e, i)), Math.max(e, i))
 }
-let random = function (rand, min, max) {
+window.random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {
     return Math.random() * arguments[0];
@@ -28,6 +28,6 @@ let random = function (rand, min, max) {
   return rand() * (max - min) + min;
 };
 
-function lerp(a, b, p) {
+window.lerp = function(a, b, p) {
   return (b - a) * p + a;
 }

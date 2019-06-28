@@ -1,6 +1,8 @@
+import Mouse from './Mouse';
+
 /**
  * @class Verly
- * @version 1.1.0
+ * @version 1.1.3
  * @author <hazru.anurag@gmail.com>
  */
 class Verly {
@@ -351,3 +353,5 @@ class Verly {
     return ragdoll;
   }
 }
+
+export default Verly;

@@ -1,4 +1,4 @@
-class TypoGraphy {
+export default class TypoGraphy {
   constructor(x, y, size, letter) {
     this.x = x;
     this.y = y;

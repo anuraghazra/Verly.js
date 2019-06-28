@@ -1,7 +1,7 @@
 /**
  * @class Entity
  */
-class Entity {
+export default class Entity {
   /**
    * 
    * @param {Number} iterations 

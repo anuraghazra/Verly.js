@@ -1,4 +1,4 @@
-class Point {
+export default class Point {
   constructor(x, y, vx, vy, radius) {
     this.pos = new Vector(x, y);
     this.oldpos = new Vector(x + (vx || 0), y + (vy || 0));
