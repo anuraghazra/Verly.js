@@ -8,8 +8,9 @@ Easy to integrate verlet physics engine.
 **Check out all [examples](https://anuraghazra.github.io/Verly.js/examples/)**
 
 ## cool things made with Verly.js
+- [VerlyRangeSlider](https://anuraghazra.github.io/VerlyRangeSlider/)
 - [ship](https://anuraghazra.github.io/Verly.js/examples/ship/)
-- [parasites](https://anuraghazra.github.io/Verly.js/parasites/)
+- [parasites](https://anuraghazra.github.io/parasites/)
 - [text](https://anuraghazra.github.io/Verly.js/examples/text/)
 - [happy holi](https://anuraghazra.github.io/Verly.js/examples/typography/)
 
