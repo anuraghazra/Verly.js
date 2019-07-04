@@ -2,6 +2,9 @@
 
 Easy to integrate verlet physics engine.
 
+**Read my article on medium about [Making a Verlet Physics Engine in JavaScript](https://medium.com/better-programming/making-a-verlet-physics-engine-in-javascript-1dff066d7bc5)**
+
+
 > - Yet another physics engine? really?
 > - Yes because i love physics :heart:.
 
