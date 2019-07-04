@@ -1,5 +1,5 @@
 export default class Mouse {
-  constructor(entities, canvas) {
+  constructor(entities, canvas, ctx) {
     this.entities = entities;
     // Drag Interaction
     this.draggedPoint = null;
@@ -8,6 +8,7 @@ export default class Mouse {
     this.offset = new Vector();
     this.offsetCoord = new Vector();
     this.canvas = canvas;
+    this.ctx = ctx;
 
     this.canvas.addEventListener('mousedown', (e) => {
       this.down = true;
@@ -68,11 +69,11 @@ export default class Mouse {
   }
   
   renderDraggedPoint(point) {
-    ctx.beginPath();
-    ctx.strokeStyle = 'black';
-    ctx.arc(point.pos.x, point.pos.y, point.radius * 1.5, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.closePath();
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = 'black';
+    this.ctx.arc(point.pos.x, point.pos.y, point.radius * 1.5, 0, Math.PI * 2);
+    this.ctx.stroke();
+    this.ctx.closePath();
   }
 
 

@@ -13,8 +13,8 @@ class Verly {
     this.canvas = canvas;
     window.WIDTH = canvas.width;
     window.HEIGHT = canvas.height;
-    window.ctx = ctx;
-    this.mouse = new Mouse(this.entities, this.canvas);
+    this.ctx = ctx;
+    this.mouse = new Mouse(this.entities, this.canvas, this.ctx);
   }
 
   /**
@@ -54,13 +54,6 @@ class Verly {
     this.entities.push(e);
   }
 
-  renderPointIndex() {
-    for (let i = 0; i < this.entities.length; i++) {
-      this.entities[i].renderPointsIndex();
-    }
-  }
-
-    
   /**
    * @method interact
    * drags points
@@ -81,13 +74,19 @@ class Verly {
     this.currentFrame++;
   }
   
+  renderPointIndex() {
+    for (let i = 0; i < this.entities.length; i++) {
+      this.entities[i].renderPointIndex(this.ctx);
+    }
+  }
+  
   /**
    * @method render
    * renders all the entity
    */
   render() {
     for (let i = 0; i < this.entities.length; i++) {
-      this.entities[i].render();
+      this.entities[i].render(this.ctx);
     }
   }
 

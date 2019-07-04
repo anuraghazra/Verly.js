@@ -110,7 +110,7 @@ export default class Point {
     this.pos.add(this.gravity);
   }
 
-  render() {
+  render(ctx) {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);

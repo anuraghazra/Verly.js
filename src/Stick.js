@@ -74,7 +74,7 @@ export default class Stick {
     // }
   }
 
-  render() {
+  render(ctx) {
     ctx.beginPath();
     ctx.strokeStyle = this.color;
     ctx.moveTo(this.startPoint.pos.x, this.startPoint.pos.y);

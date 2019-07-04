@@ -127,16 +127,7 @@ export default class Entity {
       this.sticks[i].update(stepCoef);
     }
   }
-
-  /**
-   * @method renderPoints
-   */
-  renderPoints() {
-    for (let i = 0; i < this.points.length; i++) {
-      this.points[i].render();
-    }
-  }
-
+  
   /**
    * @method updateContrains
    */
@@ -145,28 +136,7 @@ export default class Entity {
       this.points[i].constrain();
     }
   }
-
-  /**
-   * @method renderSticks
-   */
-  renderSticks() {
-    for (let i = 0; i < this.sticks.length; i++) {
-      this.sticks[i].render();
-    }
-  }
-
-  /**
-   * @method renderPointsIndex
-   */
-  renderPointsIndex() {
-    for (let i = 0; i < this.points.length; i++) {
-      ctx.beginPath();
-      ctx.fillStyle = 'black';
-      ctx.fillText(i, this.points[i].pos.x + 5, this.points[i].pos.y - 6);
-      ctx.closePath();
-    }
-  }
-
+  
   /**
    * @method update
    */
@@ -178,11 +148,43 @@ export default class Entity {
       this.updateContrains();
     }
   }
+
+  /**
+   * @method renderPoints
+   */
+  renderPoints(ctx) {
+    for (let i = 0; i < this.points.length; i++) {
+      this.points[i].render(ctx);
+    }
+  }
+
+  /**
+   * @method renderSticks
+   */
+  renderSticks(ctx) {
+    for (let i = 0; i < this.sticks.length; i++) {
+      this.sticks[i].render(ctx);
+    }
+  }
+
+  /**
+   * @method renderPointIndex
+   */
+  renderPointIndex(ctx) {
+    for (let i = 0; i < this.points.length; i++) {
+      ctx.beginPath();
+      ctx.fillStyle = 'black';
+      ctx.fillText(i, this.points[i].pos.x + 5, this.points[i].pos.y - 6);
+      ctx.closePath();
+    }
+  }
+
+
   /**
    * @method render
    */
-  render() {
-    this.renderPoints();
-    this.renderSticks();
+  render(ctx) {
+    this.renderPoints(ctx);
+    this.renderSticks(ctx);
   }
 }
