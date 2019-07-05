@@ -14,7 +14,7 @@ class VerlyCanvas extends HTMLCanvasElement {
 
     window.onload = () => {
       var entities = this.getElementsByTagName('verly-entity');
-      console.log(this['verly-box'])
+      // console.log(this['verly-box'])
       for (var i = 0; i < entities.length; i++) {
         let type = entities[i].attributes.type.value;
         let posx = parseFloat(entities[i].attributes.x.value);

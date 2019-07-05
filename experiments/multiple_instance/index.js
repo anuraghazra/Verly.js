@@ -18,9 +18,9 @@ function createInstance(w) {
   const verly = new Verly(16, canvas, ctx);
 
   let box = verly.createBox(100, 100, 100, 100);
-  let hexagon = verly.createHexagon(100, 100, 18, 50);
-  console.log(box)
-  // // rendering
+  let hexagon = verly.createHexagon(100, 100, 18, random(20, 100));
+
+  // rendering
   box.renderSticks = () => {
     for (let i = 0; i < box.sticks.length; i++) {
       let stick = box.sticks[i];
@@ -32,18 +32,14 @@ function createInstance(w) {
       ctx.closePath();
     }
   }
-  
+
+
   function animate() {
     ctx.clearRect(0, 0, width, height);
+    
 
     verly.update();
-    // verly.render();
-    
-    box.render(ctx);
-    box.renderPointIndex(ctx);
-    hexagon.render(ctx);
-    hexagon.renderPointIndex(ctx);
-
+    verly.render();
     verly.interact();
 
     // verly.renderPointIndex();

@@ -28,7 +28,7 @@
 <body>
 
   <canvas id="c"></canvas>
-  
+
   <script src="../dist/verly.bundle.js"></script>
 
   <script>
@@ -44,8 +44,8 @@
       let verly = new Verly(16, canvas, ctx);
 
       class Cloth extends Entity {
-        constructor(posx, posy, w, h, segments, pinOffset) {
-          super();
+        constructor(posx, posy, w, h, segments, pinOffset, itteration, verlyInstance) {
+          super(itteration, verlyInstance);
           verly.dontPush = true;
           let c = verly.createCloth(posx, posy, w, h, segments, pinOffset);
           this.points = c.points;
@@ -91,7 +91,7 @@
         }
       }
 
-      let cloth = new Cloth(300, 100, 500, 400, 25, 2);
+      let cloth = new Cloth(300, 100, 500, 400, 25, 2, 16, verly);
       verly.addEntity(cloth);
 
       function animate() {

@@ -43,7 +43,7 @@
 
       let verly = new Verly(16, canvas, ctx);
 
-      let b1 = new Box(200, 110, 20, 100);
+      let b1 = new Box(200, 110, 20, 100, 16, verly);
       b1.setGravity(new Vector())
       verly.addEntity(b1);
 
@@ -55,7 +55,7 @@
         p.resetVelocity();
       }
 
-      let b2 = new Box(150, 125, 20, 100);
+      let b2 = new Box(150, 125, 20, 100, 16, verly);
       b2.setGravity(new Vector())
       verly.addEntity(b2);
 

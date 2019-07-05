@@ -1,6 +1,6 @@
 class Box extends Entity {
-  constructor(x, y, width, height) {
-    super();
+  constructor(x, y, width, height, interation, verlyInstance) {
+    super(interation, verlyInstance);
     this.x = x;
     this.y = y;
     // this.x = x;

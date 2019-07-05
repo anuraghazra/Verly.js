@@ -10,7 +10,7 @@ window.onload = function () {
 
   let cloth = verly.createCloth(200, 200, 300, 300, 20, 2);
   // let ragdoll = verly.createRagdoll(100, 100);
-  verly.createBox(100, 100, 100, 100);
+  let box = verly.createBox(100, 100, 100, 100);
   
   function animate() {
     ctx.clearRect(0, 0, width, height);

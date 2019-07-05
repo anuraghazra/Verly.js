@@ -5,10 +5,12 @@ export default class Entity {
   /**
    * 
    * @param {Number} iterations 
+   * @param {Verly} verlyInstance 
    */
-  constructor(iterations) {
+  constructor(iterations, verlyInstance) {
     this.points = [];
     this.sticks = [];
+    this.verlyInstance = verlyInstance;
     this.iterations = iterations || 16;
   }
 
@@ -45,6 +47,16 @@ export default class Entity {
   }
 
   /**
+   * @method setFriction
+   * @param {Number} f 
+   */
+  setFriction(f) {
+    for (let i = 0; i < this.points.length; i++) {
+      this.points[i].setFriction(f);
+    }
+  }
+
+  /**
    * @method pin
    * @param {Number} index 
    */
@@ -60,7 +72,7 @@ export default class Entity {
     this.sticks.splice(this.sticks.indexOf(p.sticks[0]), 1);
     p.sticks.splice(0, 1);
   }
-  
+
   /**
    * @method setVelocity
    * @param {Number} x 
@@ -114,29 +126,29 @@ export default class Entity {
    */
   updatePoints() {
     for (let i = 0; i < this.points.length; i++) {
-      this.points[i].update();
+      this.points[i].update(this.verlyInstance);
     }
   }
 
   /**
    * @methdo updateSticks
-   * @param {Number} stepCoef 
+   * @param {Number?} stepCoef 
    */
   updateSticks(stepCoef) {
     for (let i = 0; i < this.sticks.length; i++) {
       this.sticks[i].update(stepCoef);
     }
   }
-  
+
   /**
-   * @method updateContrains
+   * @method updateConstraints
    */
-  updateContrains() {
+  updateConstraints() {
     for (let i = 0; i < this.points.length; i++) {
-      this.points[i].constrain();
+      this.points[i].constrain(this.verlyInstance);
     }
   }
-  
+
   /**
    * @method update
    */
@@ -145,37 +157,37 @@ export default class Entity {
     this.updatePoints();
     for (let j = 0; j < this.iterations; ++j) {
       this.updateSticks();
-      this.updateContrains();
+      this.updateConstraints();
     }
   }
 
   /**
    * @method renderPoints
    */
-  renderPoints(ctx) {
+  renderPoints() {
     for (let i = 0; i < this.points.length; i++) {
-      this.points[i].render(ctx);
+      this.points[i].render(this.verlyInstance.ctx);
     }
   }
 
   /**
    * @method renderSticks
    */
-  renderSticks(ctx) {
+  renderSticks() {
     for (let i = 0; i < this.sticks.length; i++) {
-      this.sticks[i].render(ctx);
+      this.sticks[i].render(this.verlyInstance.ctx);
     }
   }
 
   /**
    * @method renderPointIndex
    */
-  renderPointIndex(ctx) {
+  renderPointIndex() {
     for (let i = 0; i < this.points.length; i++) {
-      ctx.beginPath();
-      ctx.fillStyle = 'black';
-      ctx.fillText(i, this.points[i].pos.x + 5, this.points[i].pos.y - 6);
-      ctx.closePath();
+      this.verlyInstance.ctx.beginPath();
+      this.verlyInstance.ctx.fillStyle = 'black';
+      this.verlyInstance.ctx.fillText(i, this.points[i].pos.x + 5, this.points[i].pos.y - 6);
+      this.verlyInstance.ctx.closePath();
     }
   }
 
@@ -183,8 +195,8 @@ export default class Entity {
   /**
    * @method render
    */
-  render(ctx) {
-    this.renderPoints(ctx);
-    this.renderSticks(ctx);
+  render() {
+    this.renderPoints();
+    this.renderSticks();
   }
 }

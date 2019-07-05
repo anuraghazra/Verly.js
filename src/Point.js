@@ -18,6 +18,9 @@ export default class Point {
   setGravity(g) {
     this.gravity = g;
   }
+  setFriction(f) {
+    this.friction = f;
+  }
   setForceAcc(f) {
     this.forceAcc = f;
   }
@@ -64,7 +67,11 @@ export default class Point {
     this.pos.y = y + radius * Math.sin(time * speed);
   }
 
-  constrain() {
+  /**
+   * @method constrain
+   * @param {Verly} verlyInstance 
+   */
+  constrain(verlyInstance) {
     // if (this.pos.y > HEIGHT - 1) {
     //   this.pos.y = HEIGHT - 1;
     // }
@@ -75,16 +82,16 @@ export default class Point {
     //   this.pos.x = WIDTH - 1;
     // }
     // let vel = Vector.sub(this.pos, this.oldpos);
-    if (this.pos.x > WIDTH - this.radius) {
-      this.pos.x = WIDTH - this.radius;
+    if (this.pos.x > verlyInstance.WIDTH - this.radius) {
+      this.pos.x = verlyInstance.WIDTH - this.radius;
       // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
     if (this.pos.x < this.radius) {
       this.pos.x = this.radius;
       // this.oldpos.x = (this.pos.x + vel.x) * this.bounce;
     }
-    if (this.pos.y > HEIGHT - this.radius) {
-      this.pos.y = HEIGHT - this.radius;
+    if (this.pos.y > verlyInstance.HEIGHT - this.radius) {
+      this.pos.y = verlyInstance.HEIGHT - this.radius;
       // this.oldpos.y = (this.pos.y + vel.y) * this.bounce;
     }
     if (this.pos.y < this.radius) {
@@ -94,12 +101,16 @@ export default class Point {
   };
 
 
-  update() {
+  /**
+   * @method update
+   * @param {Verly} verlyInstance 
+   */
+  update(verlyInstance) {
     if (this.pinned) return;
     let vel = Vector.sub(this.pos, this.oldpos);
     vel.mult(this.friction);
     // if the point touches the ground set groundFriction
-    if (this.pos.y >= HEIGHT - this.radius && vel.magSq() > 0.000001) {
+    if (this.pos.y >= verlyInstance.HEIGHT - this.radius && vel.magSq() > 0.000001) {
       var m = vel.mag();
       vel.x /= m;
       vel.y /= m;
@@ -110,6 +121,10 @@ export default class Point {
     this.pos.add(this.gravity);
   }
 
+  /**
+   * @method render
+   * @param {CanvasRenderingContext2D} ctx 
+   */
   render(ctx) {
     ctx.beginPath();
     ctx.fillStyle = this.color;

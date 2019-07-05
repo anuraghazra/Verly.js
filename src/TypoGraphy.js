@@ -1,5 +1,5 @@
 export default class TypoGraphy {
-  constructor(x, y, size, letter) {
+  constructor(x, y, size, letter, verlyInstance) {
     this.x = x;
     this.y = y;
     this.size = size;
@@ -202,7 +202,7 @@ export default class TypoGraphy {
 
     let gridArray = this.letters[letter];
 
-    this.text = new Entity(this.iterations);
+    this.text = new Entity(this.iterations, verlyInstance);
     // this.text.renderPoints = function() {};
 
     for (let x = 0; x < gridArray.length; x++) {

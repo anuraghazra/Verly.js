@@ -43,7 +43,7 @@ window.onload = function () {
   let word = new Text('SAK', 300, 300, 25);
 
   // let box = verly.createHexagon(200, 200, 15, 50);
-  let ent = new Entity(60);
+  let ent = new Entity(60, verly);
   ent.addPoint(ship);
   let boxtmp = verly.joinEntities(word.entity, ent);
   let BOX_POINTS = boxtmp.points.length;

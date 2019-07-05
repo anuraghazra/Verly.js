@@ -2,17 +2,23 @@ import Mouse from './Mouse';
 
 /**
  * @class Verly
- * @version 1.1.3
+ * @version 1.1.4
  * @author <hazru.anurag@gmail.com>
  */
 class Verly {
+  /**
+   * 
+   * @param {Number} iterations 
+   * @param {HTMLCanvasElement} canvas 
+   * @param {CanvasRenderingContext2D} ctx 
+   */
   constructor(iterations, canvas, ctx) {
     this.entities = [];
     this.iterations = iterations;
     this.currentFrame = 0;
     this.canvas = canvas;
-    window.WIDTH = canvas.width;
-    window.HEIGHT = canvas.height;
+    this.WIDTH = canvas.width;
+    this.HEIGHT = canvas.height;
     this.ctx = ctx;
     this.mouse = new Mouse(this.entities, this.canvas, this.ctx);
   }
@@ -22,7 +28,7 @@ class Verly {
    * @param  {...Entity} args 
    */
   joinEntities(...args) {
-    let mixEntity = new Entity(this.iterations);
+    let mixEntity = new Entity(this.iterations, this);
 
     let points = [];
     let sticks = [];
@@ -50,6 +56,10 @@ class Verly {
     return mixEntity; // return for chaining
   }
 
+  /**
+   * @method addEntity
+   * @param {Entity} e 
+   */
   addEntity(e) {
     this.entities.push(e);
   }
@@ -73,13 +83,16 @@ class Verly {
 
     this.currentFrame++;
   }
-  
+
+  /**
+   * @method renderPointIndex
+   */
   renderPointIndex() {
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].renderPointIndex(this.ctx);
     }
   }
-  
+
   /**
    * @method render
    * renders all the entity
@@ -101,7 +114,7 @@ class Verly {
    * @param {number} h 
    */
   createBox(x, y, w, h) {
-    const box = new Entity(this.iterations);
+    const box = new Entity(this.iterations, this);
     box.addPoint(x, y, 0, 0);
     box.addPoint(x + w, y, 0, 0);
     box.addPoint(x + w, y + h, 0, 0);
@@ -127,7 +140,7 @@ class Verly {
    * @param {number} stride2=5
    */
   createHexagon(x, y, segments, radius = 50, stride1 = 1, stride2 = 5) {
-    const hexagon = new Entity(this.iterations);
+    const hexagon = new Entity(this.iterations, this);
 
     let stride = (2 * Math.PI) / segments;
 
@@ -165,7 +178,7 @@ class Verly {
    * @param {number} pinOffset 
    */
   createCloth(posx, posy, w, h, segments, pinOffset) {
-    let cloth = new Entity(this.iterations);
+    let cloth = new Entity(this.iterations, this);
 
     let xStride = w / segments;
     let yStride = h / segments;
@@ -220,7 +233,7 @@ class Verly {
    * @param {number} pin=0
    */
   createRope(x, y, segments = 10, gap = 15, pin) {
-    let rope = new Entity(this.iterations);
+    let rope = new Entity(this.iterations, this);
 
     for (let i = 0; i < segments; i++) {
       rope.addPoint(x + i * gap, y, 0, 0)
@@ -239,7 +252,7 @@ class Verly {
 
 
   createRagdoll(x0, y0) {
-    let ragdoll = new Entity(this.iterations);
+    let ragdoll = new Entity(this.iterations, this);
 
     // Head
     // x, y, extremity, gravity, radius

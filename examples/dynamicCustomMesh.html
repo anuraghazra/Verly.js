@@ -42,7 +42,7 @@
 
       let verly = new Verly(16, canvas, ctx);
 
-      let custom = new Entity(16);
+      let custom = new Entity(16, verly);
 
       window.addEventListener('contextmenu', (e) => {
         e.preventDefault();
@@ -62,6 +62,7 @@
 
       verly.createRagdoll(100, 100, 100, 100);
       verly.addEntity(custom);
+      
       function animate() {
         ctx.clearRect(0, 0, width, height);
 

@@ -25,8 +25,8 @@ window.onload = function () {
     urlText2 = search_params.get('text2') || 'HOLI';
   }
 
-  let word = new Text(urlText, 50, 100, 25);
-  let word2 = new Text(urlText2, 700, 100, 25);
+  let word = new Text(urlText, 50, 100, 25, verly);
+  let word2 = new Text(urlText2, 700, 100, 25, verly);
 
   // let A = new TypoGraphy(offsetX, center, 20, 'A');
 

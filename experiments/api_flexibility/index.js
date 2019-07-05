@@ -17,14 +17,6 @@ window.onload = function () {
   mix.addStick(25, 26, 10);
   hexagon.setGravity(new Vector(0, -0.8))
 
-  // class Vox extends Entity.Rope {
-  //   constructor() {
-  //     super()
-
-
-  //   }
-  // }
-
 
   function animate() {
     ctx.clearRect(0, 0, width, height);

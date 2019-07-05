@@ -45,32 +45,26 @@
       mouse.setForceAcc(-30);
       mouse.setRadius(100);
 
-      
+
       let mBehavior = 2;
       window.addEventListener('mousemove', (e) => {
-        if (e.altKey) {
-          addParticles(e.offsetX, e.offsetY);
-        }
-        mouse.pos.x = e.offsetX;
-        mouse.pos.y = e.offsetY;
+        if (e.altKey) addParticles(e.offsetX, e.offsetY);
+        mouse.pos.setXY(e.offsetX, e.offsetY)
       })
-
-      window.addEventListener('mousedown', () => {
-        mBehavior = -5;
-      })
-      window.addEventListener('mouseup', () => {
-        mBehavior = 5;
-      })
+      window.addEventListener('mousedown', () => mBehavior = -5)
+      window.addEventListener('mouseup', () => mBehavior = 5)
 
 
-      let particles = new Entity();
+
+      let particles = new Entity(16, verly);
       function addParticles(x, y) {
         let p = new Point(x, y);
         p.setRadius(3);
         p.setGravity(new Vector(0, 0));
         particles.addPoint(p);
       }
-      for (let i = 0; i < 1000; i++) {
+
+      for (let i = 0; i < 700; i++) {
         addParticles(random(width), random(height));
       }
 
@@ -83,7 +77,7 @@
         for (let i = 0; i < particles.points.length; i++) {
           for (let j = 0; j < particles.points.length; j++) {
             if (particles.points[i] !== particles.points[j]) {
-              particles.points[j].resolveBehaviors(particles.points[i], 20, 2)
+              particles.points[j].resolveBehaviors(particles.points[i], 20, 3)
             }
           }
           particles.points[i].resolveBehaviors(mouse, mouse.radius, mBehavior)
@@ -91,7 +85,7 @@
 
         verly.update();
         verly.render();
-        verly.interact();
+        // verly.interact();
 
         // verly.renderPointIndex();
 
