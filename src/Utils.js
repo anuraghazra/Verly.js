@@ -1,13 +1,29 @@
+/**
+ * @method normalizedRandom
+ */
 window.normalizedRandom = function () {
   return Math.random() * 2 - 1;
 };
+/**
+ * @method degreesToRad
+ * @param {number} degrees
+ */
 window.degreesToRad = function (degrees) {
   var pi = Math.PI;
   return degrees * (pi / 180);
 }
-window.clamp = function (t, e, i) {
+/**
+ * @method clamp
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ */
+window.clamp = function (value, min, max) {
   return Math.min(Math.max(t, Math.min(e, i)), Math.max(e, i))
 }
+/**
+ * @method random
+ */
 window.random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {
@@ -27,7 +43,12 @@ window.random = function (rand, min, max) {
   }
   return rand() * (max - min) + min;
 };
-
-window.lerp = function(a, b, p) {
+/**
+ * @method lerp
+ * @param {number} a
+ * @param {number} b
+ * @param {number} p
+ */
+window.lerp = function (a, b, p) {
   return (b - a) * p + a;
 }

@@ -1,4 +1,12 @@
-export default class Stick {
+class Stick {
+  /**
+   * creates a stick between two Point
+   * takes optional length and stiffness 
+   * @param {Point} p1 
+   * @param {Point} p2 
+   * @param {number=} length 
+   * @param {number=} stiffness 
+   */
   constructor(p1, p2, length, stiffness) {
     this.startPoint = p1;
     this.endPoint = p2;
@@ -13,6 +21,10 @@ export default class Stick {
     this.endPoint.sticks.push(this);
   }
 
+  /**
+   * 
+   * @param {number=} stepCoef 
+   */
   update(stepCoef) {
     // not gonna use vectors for performance optimization
     // let dx = this.endPoint.pos.x - this.startPoint.pos.x;
@@ -74,6 +86,10 @@ export default class Stick {
     // }
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} ctx 
+   */
   render(ctx) {
     ctx.beginPath();
     ctx.strokeStyle = this.color;
@@ -83,3 +99,5 @@ export default class Stick {
     ctx.closePath();
   }
 }
+
+export default Stick;

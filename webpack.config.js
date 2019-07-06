@@ -1,4 +1,5 @@
 const path = require('path');
+var JsDocPlugin = require('jsdoc-webpack4-plugin')
 
 module.exports = {
   mode: "production",
@@ -11,4 +12,7 @@ module.exports = {
     // libraryTarget: 'window',
     // globalObject: 'this'
   },
-} 
+  plugins: [
+    new JsDocPlugin({ conf: './jsdoc.conf' })
+  ]
+}

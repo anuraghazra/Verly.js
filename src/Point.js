@@ -1,4 +1,12 @@
-export default class Point {
+class Point {
+  /**
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number=} vx 
+   * @param {number=} vy 
+   * @param {number=} radius 
+   */
   constructor(x, y, vx, vy, radius) {
     this.pos = new Vector(x, y);
     this.oldpos = new Vector(x + (vx || 0), y + (vy || 0));
@@ -15,22 +23,43 @@ export default class Point {
     this.forceAcc = 1;
   }
 
+  /**
+   * 
+   * @param {Vector} g 
+   */
   setGravity(g) {
     this.gravity = g;
   }
+  /**
+   * 
+   * @param {number} f 
+   */
   setFriction(f) {
     this.friction = f;
   }
+  /**
+   * 
+   * @param {number} f 
+   */
   setForceAcc(f) {
     this.forceAcc = f;
   }
+  /**
+   * 
+   * @param {number} m 
+   */
   setMass(m) {
     this.mass = m;
   }
+  /**
+   * 
+   * @param {number} radius 
+   */
   setRadius(radius) {
     this.radius = radius;
   }
 
+  
   resetVelocity() {
     this.oldpos.setXY(this.pos.x, this.pos.y);
   }
@@ -41,12 +70,23 @@ export default class Point {
     this.pinned = false;
   }
 
+  /**
+   * 
+   * @param {number} angle 
+   * @param {number} offset 
+   */
   rotate(angle, offset) {
     let x = offset.x + (this.pos.x - offset.x) * Math.cos(angle) - (this.pos.y - offset.y) * Math.sin(angle);
     let y = offset.y + (this.pos.x - offset.x) * Math.sin(angle) + (this.pos.y - offset.y) * Math.cos(angle);
     this.pos.setXY(x, y);
   }
 
+  /**
+   * 
+   * @param {Point} p 
+   * @param {number} radius 
+   * @param {number} strength 
+   */
   resolveBehaviors(p, radius, strength) {
     var delta = Vector.sub(this.pos, p.pos);
     var dist = delta.magSq();
@@ -58,17 +98,28 @@ export default class Point {
     }
   }
 
+  /**
+   * 
+   * @param {number|Vector} f 
+   */
   applyForce(f) {
     this.pos.add(f);
   }
 
+  /**
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} time 
+   * @param {number} radius 
+   * @param {number} speed 
+   */
   addMotor(x, y, time, radius, speed) {
     this.pos.x = x + radius * Math.cos(time * speed);
     this.pos.y = y + radius * Math.sin(time * speed);
   }
 
   /**
-   * @method constrain
    * @param {Verly} verlyInstance 
    */
   constrain(verlyInstance) {
@@ -102,7 +153,6 @@ export default class Point {
 
 
   /**
-   * @method update
    * @param {Verly} verlyInstance 
    */
   update(verlyInstance) {
@@ -122,7 +172,6 @@ export default class Point {
   }
 
   /**
-   * @method render
    * @param {CanvasRenderingContext2D} ctx 
    */
   render(ctx) {
@@ -133,3 +182,6 @@ export default class Point {
     ctx.closePath();
   }
 }
+
+
+export default Point;

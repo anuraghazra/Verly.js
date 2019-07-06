@@ -1,4 +1,12 @@
-export default class TypoGraphy {
+class TypoGraphy {
+  /**
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} size 
+   * @param {string} letter 
+   * @param {Verly} verlyInstance 
+   */
   constructor(x, y, size, letter, verlyInstance) {
     this.x = x;
     this.y = y;
@@ -228,3 +236,5 @@ export default class TypoGraphy {
     }
   }
 }
+
+export default TypoGraphy;

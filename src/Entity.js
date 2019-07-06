@@ -1,10 +1,7 @@
-/**
- * @class Entity
- */
-export default class Entity {
+class Entity {
+
   /**
-   * 
-   * @param {Number} iterations 
+   * @param {number} iterations 
    * @param {Verly} verlyInstance 
    */
   constructor(iterations, verlyInstance) {
@@ -37,7 +34,7 @@ export default class Entity {
   // }
 
   /**
-   * @method setGravity
+   * sets the gravity of this entity
    * @param {Vector} g 
    */
   setGravity(g) {
@@ -47,8 +44,8 @@ export default class Entity {
   }
 
   /**
-   * @method setFriction
-   * @param {Number} f 
+   * sets the friction of this entity
+   * @param {number} f 
    */
   setFriction(f) {
     for (let i = 0; i < this.points.length; i++) {
@@ -57,15 +54,15 @@ export default class Entity {
   }
 
   /**
-   * @method pin
-   * @param {Number} index 
+   * pin a specific Point
+   * @param {number} index 
    */
   pin(index) {
     this.points[index].pin();
   }
 
   /**
-   * @method removeSticks
+   * remove a specific Point
    * @param {Point} p
    */
   removeSticks(p) {
@@ -74,7 +71,7 @@ export default class Entity {
   }
 
   /**
-   * @method setVelocity
+   * 
    * @param {Number} x 
    * @param {Number} y 
    */
@@ -86,13 +83,13 @@ export default class Entity {
   }
 
   /**
-   * @ethod addPoint
+   * adds a Point in points array with {x,y,vx,vy,radius}
    * @param {Number|Point} x 
-   * @param {Number?} y 
-   * @param {Number?} vx 
-   * @param {Number?} vy 
-   * @param {Number?} radius 
-   * @description adds a Point in points array with {x,y,vx,vy,radius}
+   * @param {Number=} y 
+   * @param {Number=} vx 
+   * @param {Number=} vy 
+   * @param {Number=} radius 
+   * @returns {Point}
    */
   addPoint(x, y, vx, vy, radius) {
     let p
@@ -106,7 +103,7 @@ export default class Entity {
   }
 
   /**
-   * 
+   * adds a stick inbetween two points
    * @param {Number|Stick} p1 
    * @param {Number} p2 
    * @param {Number} length 
@@ -122,7 +119,6 @@ export default class Entity {
   }
 
   /**
-   * @method updatePoints
    */
   updatePoints() {
     for (let i = 0; i < this.points.length; i++) {
@@ -132,7 +128,7 @@ export default class Entity {
 
   /**
    * @methdo updateSticks
-   * @param {Number?} stepCoef 
+   * @param {Number=} stepCoef 
    */
   updateSticks(stepCoef) {
     for (let i = 0; i < this.sticks.length; i++) {
@@ -141,7 +137,6 @@ export default class Entity {
   }
 
   /**
-   * @method updateConstraints
    */
   updateConstraints() {
     for (let i = 0; i < this.points.length; i++) {
@@ -150,7 +145,6 @@ export default class Entity {
   }
 
   /**
-   * @method update
    */
   update() {
     // var stepCoef = 1 / this.iterations;
@@ -162,7 +156,6 @@ export default class Entity {
   }
 
   /**
-   * @method renderPoints
    */
   renderPoints() {
     for (let i = 0; i < this.points.length; i++) {
@@ -171,7 +164,6 @@ export default class Entity {
   }
 
   /**
-   * @method renderSticks
    */
   renderSticks() {
     for (let i = 0; i < this.sticks.length; i++) {
@@ -180,7 +172,6 @@ export default class Entity {
   }
 
   /**
-   * @method renderPointIndex
    */
   renderPointIndex() {
     for (let i = 0; i < this.points.length; i++) {
@@ -193,10 +184,11 @@ export default class Entity {
 
 
   /**
-   * @method render
    */
   render() {
     this.renderPoints();
     this.renderSticks();
   }
 }
+
+export default Entity;
