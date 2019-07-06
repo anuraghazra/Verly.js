@@ -2,20 +2,23 @@
 
 Easy to integrate verlet physics engine.
 
-**Read my article on medium about [Making a Verlet Physics Engine in JavaScript](https://medium.com/better-programming/making-a-verlet-physics-engine-in-javascript-1dff066d7bc5)**
-
-
 > - Yet another physics engine? really?
 > - Yes because i love physics :heart:.
 
-**Check out all [examples](https://anuraghazra.github.io/Verly.js/examples/)**
+**Read my article on medium about [Making a Verlet Physics Engine in JavaScript](https://medium.com/better-programming/making-a-verlet-physics-engine-in-javascript-1dff066d7bc5)**
+
+
 
 ## cool things made with Verly.js
 - [VerlyRangeSlider](https://anuraghazra.github.io/VerlyRangeSlider/)
-- [ship](https://anuraghazra.github.io/Verly.js/examples/ship/)
-- [parasites](https://anuraghazra.github.io/parasites/)
-- [text](https://anuraghazra.github.io/Verly.js/examples/text/)
-- [happy holi](https://anuraghazra.github.io/Verly.js/examples/typography/)
+- [Ship](https://anuraghazra.github.io/Verly.js/examples/ship/)
+- [Parasites](https://anuraghazra.github.io/parasites/)
+- [Swingy Text](https://anuraghazra.github.io/Verly.js/examples/text/)
+- [Happy Holi](https://anuraghazra.github.io/Verly.js/examples/typography/)
+- **See more [examples](https://anuraghazra.github.io/Verly.js/examples/)**
+
+---
+### want more info? Check out the API **[documentation](https://anuraghazra.github.io/Verly.js/docs)**
 
 
 ## Installation
@@ -39,7 +42,7 @@ npm install && npm run build
 ## import CDN link
 ```html
 <!-- add this to head -->
-<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.3/dist/verly.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.4/dist/verly.bundle.js"></script>
 ```
 
 ```js
@@ -84,8 +87,8 @@ npm install && npm run build
 ----------
 
 ## Author
-- hazru.anurag@gmail.com
 - https://anuraghazra.github.io
+- hazru.anurag@gmail.com
 
 
 
