@@ -8,7 +8,6 @@ Easy to integrate verlet physics engine.
 **Read my article on medium about [Making a Verlet Physics Engine in JavaScript](https://medium.com/better-programming/making-a-verlet-physics-engine-in-javascript-1dff066d7bc5)**
 
 
-
 ## cool things made with Verly.js
 - [VerlyRangeSlider](https://anuraghazra.github.io/VerlyRangeSlider/)
 - [Ship](https://anuraghazra.github.io/Verly.js/examples/ship/)
@@ -19,6 +18,9 @@ Easy to integrate verlet physics engine.
 
 ---
 ### want more info? Check out the API **[documentation](https://anuraghazra.github.io/Verly.js/docs)**
+
+
+### *Experimental Reactjs Integration - check out the [sandbox](https://codesandbox.io/s/verlyjs-react-w5kfr)*
 
 
 ## Installation
