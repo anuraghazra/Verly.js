@@ -20,7 +20,7 @@ Easy to integrate verlet physics engine.
 ### want more info? Check out the API **[documentation](https://anuraghazra.github.io/Verly.js/docs)**
 
 
-### *Experimental Reactjs Integration - check out the [sandbox](https://codesandbox.io/s/verlyjs-react-w5kfr)*
+#### *Experimental Reactjs Integration - check out the [sandbox](https://codesandbox.io/s/verlyjs-react-w5kfr)*
 
 
 ## Installation
