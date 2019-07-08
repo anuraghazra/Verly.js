@@ -5,7 +5,7 @@
  * @param {number} x
  * @param {number} y
  */
-export class Vector {
+class Vector {
 
   constructor(x, y) {
     this.x = x || 0;
@@ -326,3 +326,5 @@ export class Vector {
     this.y = Math.sin(b) * c;
   }
 }
+
+export default Vector;

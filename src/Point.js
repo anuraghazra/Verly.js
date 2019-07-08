@@ -87,13 +87,13 @@ class Point {
    * @param {number} radius 
    * @param {number} strength 
    */
-  resolveBehaviors(p, radius, strength) {
+  resolveBehaviors(p, radius = this.radius, strength = this.forceAcc) {
     var delta = Vector.sub(this.pos, p.pos);
     var dist = delta.magSq();
 
-    let magR = (!radius) ? (this.radius * this.radius) : (radius * radius);
+    let magR = radius * radius;
     if (dist < magR) {
-      var f = delta.normalizeTo(1 - (dist / magR)).mult(strength || this.forceAcc);
+      var f = delta.normalizeTo(1 - (dist / magR)).mult(strength);
       this.applyForce(f);
     }
   }
