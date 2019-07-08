@@ -6,12 +6,14 @@ class Stick {
    * @param {Point} p2 
    * @param {number=} length 
    * @param {number=} stiffness 
+   * @param {boolean=} hidden 
    */
-  constructor(p1, p2, length, stiffness) {
+  constructor(p1, p2, length, stiffness, hidden) {
     this.startPoint = p1;
     this.endPoint = p2;
     this.stiffness = stiffness || 2;
     this.color = '#f5476a';
+    this.hidden = hidden;
     if (!length) {
       this.length = this.startPoint.pos.dist(this.endPoint.pos);
     } else {
@@ -87,10 +89,47 @@ class Stick {
   }
 
   /**
+   * @param {string} color
+   * @returns {Stick}
+   */
+  setColor(color) {
+    this.color = color;
+    return this;
+  }
+
+  /**
+   * @param {number} length
+   * @returns {Stick}
+   */
+  setLength(length) {
+    this.length = length;
+    return this;
+  }
+
+  /**
+   * @param {number} value
+   * @returns {Stick}
+   */
+  setStiffness(value) {
+    this.stiffness = value;
+    return this;
+  }
+
+  /**
+   * @param {boolean} value
+   * @returns {Stick}
+   */
+  setHidden(value) {
+    this.hidden = value;
+    return this;
+  }
+
+  /**
    * 
    * @param {CanvasRenderingContext2D} ctx 
    */
   render(ctx) {
+    if (this.hidden) return;
     ctx.beginPath();
     ctx.strokeStyle = this.color;
     ctx.moveTo(this.startPoint.pos.x, this.startPoint.pos.y);

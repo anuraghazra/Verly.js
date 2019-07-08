@@ -50,9 +50,7 @@
 
       let particles = new Entity(16, verly);
       function addParticles(x, y) {
-        let p = new Point(x, y);
-        p.setRadius(3);
-        particles.addPoint(p);
+        particles.addPoint(x, y).setRadius(3);
       }
 
       for (let i = 0; i < 700; i++) {

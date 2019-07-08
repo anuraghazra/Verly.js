@@ -41,10 +41,7 @@
 
       let verly = new Verly(16, canvas, ctx);
 
-      let mouse = new Point(0, 0);
-      mouse.setForceAcc(-30);
-      mouse.setRadius(100);
-
+      let mouse = new Point(0, 0).setForceAcc(-30).setRadius(100);
 
       let mBehavior = 2;
       window.addEventListener('mousemove', (e) => {
@@ -58,10 +55,7 @@
 
       let particles = new Entity(16, verly);
       function addParticles(x, y) {
-        let p = new Point(x, y);
-        p.setRadius(3);
-        p.setGravity(new Vector(0, 0));
-        particles.addPoint(p);
+        particles.addPoint(x, y).setRadius(3).setGravity(new Vector(0, 0));
       }
 
       for (let i = 0; i < 700; i++) {

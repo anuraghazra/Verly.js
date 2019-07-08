@@ -104,18 +104,21 @@ class Entity {
 
   /**
    * adds a stick inbetween two points
-   * @param {Number|Stick} p1 
-   * @param {Number} p2 
-   * @param {Number} length 
+   * @param {number|Stick} p1 
+   * @param {number=} p2 
+   * @param {number=} length 
+   * @param {number=} stiffness 
+   * @param {boolean=} ishidden 
    */
-  addStick(p1, p2, length) {
-    // let s;
-    // return s;
+  addStick(p1, p2, length, stiffness, ishidden) {
+    let stick;
     if (p1 instanceof Stick) {
-      this.sticks.push(p1);
+      stick = p1;
     } else {
-      this.sticks.push(new Stick(this.points[p1], this.points[p2], length));
+      stick = new Stick(this.points[p1], this.points[p2], length, stiffness, ishidden);
     }
+    this.sticks.push(stick);
+    return stick;
   }
 
   /**

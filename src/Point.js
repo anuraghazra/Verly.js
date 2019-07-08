@@ -29,6 +29,7 @@ class Point {
    */
   setGravity(g) {
     this.gravity = g;
+    return this;
   }
   /**
    * 
@@ -36,38 +37,87 @@ class Point {
    */
   setFriction(f) {
     this.friction = f;
+    return this;
   }
   /**
    * 
    * @param {number} f 
    */
+  setGroundFriction(f) {
+    this.groundFriction = f;
+    return this;
+  }
+  /**
+   * 
+   * @param {number} b
+   */
+  setBounce(b) {
+    this.bounce = b;
+    return this;
+  }
+  /**
+   * 
+   * @param {number} f 
+   * @returns {Point}
+   */
   setForceAcc(f) {
     this.forceAcc = f;
+    return this;
   }
   /**
    * 
    * @param {number} m 
+   * @returns {Point}
    */
   setMass(m) {
     this.mass = m;
+    return this;
   }
   /**
    * 
    * @param {number} radius 
+   * @returns {Point}
    */
   setRadius(radius) {
     this.radius = radius;
+    return this;
   }
 
-  
-  resetVelocity() {
-    this.oldpos.setXY(this.pos.x, this.pos.y);
+  /**
+   * @param {string} color 
+   * @returns {Point}
+   */
+  setColor(color) {
+    this.color = color;
+    return this;
   }
+
+  /**
+   * @param {Vector} vel 
+   * @returns {Point}
+   */
+  setVelocity(vel) {
+    this.oldpos.setXY(vel.x, vel.y);
+    return this;
+  }
+
+  /**
+   * @returns {Point}
+   */
   pin() {
     this.pinned = true;
+    return this;
   }
+  /**
+   * @returns {Point}
+   */
   unpin() {
     this.pinned = false;
+    return this;
+  }
+
+  resetVelocity() {
+    this.oldpos.setXY(this.pos.x, this.pos.y);
   }
 
   /**

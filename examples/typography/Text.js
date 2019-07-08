@@ -14,7 +14,7 @@ class Text {
       this.words.push(word);
       this.gap += 110;
     }
-    
+
     this.entity = this.join.apply(this.entity, this.words);
   }
 

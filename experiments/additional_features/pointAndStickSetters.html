@@ -28,53 +28,54 @@
 <body>
 
   <canvas id="c"></canvas>
-  <script src="../dist/verly.bundle.js"></script>
+  <script src="../../dist/verly.bundle.js"></script>
+
 
   <script>
-    
     window.onload = function () {
       let canvas = document.getElementById('c');
       let ctx = canvas.getContext('2d');
       let width = 600;
-      let height = 500;
+      let height = 600;
       canvas.width = width;
       canvas.height = height;
 
       let verly = new Verly(16, canvas, ctx);
 
-      let custom = new Entity(16, verly);
+      const box = new Entity(16, verly);
+      box.addPoint(100, 100).setRadius(20).setMass(20);
+      box.addPoint(300, 100, 0, 0);
+      box.addPoint(300, 250, 0, 0);
+      box.addPoint(100, 250, 0, 0);
+      box.addStick(0, 1);
+      box.addStick(1, 2);
+      box.addStick(2, 3);
 
-      window.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-      })
-      window.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        if (e.button !== 2) return;
+      let s = new Stick(box.points[3], box.points[0]).setColor('green');
+      box.addStick(s).setLength(200);
+      box.addStick(3, 1).setHidden(true);
 
-        custom.addPoint(e.offsetX, e.offsetY);
-        if (custom.points.length > 1) {
-          custom.addStick(custom.points.length - 2, custom.points.length - 1);
-        }
-      })
+      verly.addEntity(box);
 
-      verly.createRagdoll(100, 100, 100, 100);
-      verly.addEntity(custom);
-      
+      verly.createRagdoll(200, 200)
+
+
       function animate() {
         ctx.clearRect(0, 0, width, height);
-
 
         verly.update();
         verly.render();
         verly.interact();
-        // verly.renderPointIndex();
+
+        verly.renderPointIndex();
 
         requestAnimationFrame(animate);
       }
       animate();
     }
+
   </script>
+
 </body>
 
 </html>

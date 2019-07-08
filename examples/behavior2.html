@@ -45,26 +45,16 @@
       let verly = new Verly(16, canvas, ctx);
 
       let particle = new Entity(16, verly);
-      let p1 = new Point(0, 0);
-      let p2 = new Point(0, 0);
-      p1.setRadius(20);
-      p2.setRadius(20);
-      particle.addPoint(p1);
-      particle.addPoint(p2);
+      let p1 = particle.addPoint(0, 0).setRadius(20);
+      let p2 = particle.addPoint(0, 0).setRadius(20);
 
       for (let i = 0; i < 400; i++) {
         particle.addPoint(random(width), random(height));
       }
-      // particle.addStick(0, 1, 200)
-
       particle.setGravity(new Vector(0, 0));
-
       verly.addEntity(particle);
-      p1.setGravity(new Vector(0, 0.0));
 
       let angle = 0;
-
-
       function animate() {
         ctx.clearRect(0, 0, width, height);
 

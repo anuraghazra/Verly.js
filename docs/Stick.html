@@ -62,7 +62,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Stick<span class="signature">(p1, p2, length<span class="signature-attributes">opt</span>, stiffness<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Stick<span class="signature">(p1, p2, length<span class="signature-attributes">opt</span>, stiffness<span class="signature-attributes">opt</span>, hidden<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -80,7 +80,7 @@
     <h4 class="name" id="Stick">
         
         <span class="code-name">
-            new Stick<span class="signature">(p1, p2, length<span class="signature-attributes">opt</span>, stiffness<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            new Stick<span class="signature">(p1, p2, length<span class="signature-attributes">opt</span>, stiffness<span class="signature-attributes">opt</span>, hidden<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
         </span>
     </h4>
     
@@ -260,6 +260,41 @@
 
 
     
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>hidden</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+    
     </tbody>
 </table>
 
@@ -302,7 +337,7 @@
         <p class="tag-source">
             <a href="Stick.js.html" class="button">View Source</a>
             <span>
-                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line10">line 10</a>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line11">line 11</a>
             </span>
         </p>
     
@@ -465,7 +500,7 @@
         <p class="tag-source">
             <a href="Stick.js.html" class="button">View Source</a>
             <span>
-                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line93">line 93</a>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line131">line 131</a>
             </span>
         </p>
     
@@ -487,6 +522,654 @@
 
 
 
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    
+    <h4 class="name" id="setColor">
+        
+        <span class="code-name">
+            setColor<span class="signature">(color)</span><span class="type-signature"> &rarr; {<a href="Stick.html">Stick</a>}</span>
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>color</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Stick.js.html" class="button">View Source</a>
+            <span>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line95">line 95</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type"><a href="Stick.html">Stick</a></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    
+    <h4 class="name" id="setHidden">
+        
+        <span class="code-name">
+            setHidden<span class="signature">(value)</span><span class="type-signature"> &rarr; {<a href="Stick.html">Stick</a>}</span>
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Stick.js.html" class="button">View Source</a>
+            <span>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line122">line 122</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type"><a href="Stick.html">Stick</a></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    
+    <h4 class="name" id="setLength">
+        
+        <span class="code-name">
+            setLength<span class="signature">(length)</span><span class="type-signature"> &rarr; {<a href="Stick.html">Stick</a>}</span>
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>length</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Stick.js.html" class="button">View Source</a>
+            <span>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line104">line 104</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type"><a href="Stick.html">Stick</a></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    
+    <h4 class="name" id="setStiffness">
+        
+        <span class="code-name">
+            setStiffness<span class="signature">(value)</span><span class="type-signature"> &rarr; {<a href="Stick.html">Stick</a>}</span>
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Stick.js.html" class="button">View Source</a>
+            <span>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line113">line 113</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type"><a href="Stick.html">Stick</a></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -616,7 +1299,7 @@
         <p class="tag-source">
             <a href="Stick.js.html" class="button">View Source</a>
             <span>
-                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line28">line 28</a>
+                <a href="Stick.js.html">Stick.js</a>, <a href="Stick.js.html#line30">line 30</a>
             </span>
         </p>
     
@@ -665,7 +1348,7 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Mon Jul 08 2019 18:43:58 GMT+0530 (India Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Mon Jul 08 2019 20:31:06 GMT+0530 (India Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
