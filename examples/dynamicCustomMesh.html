@@ -16,12 +16,10 @@
     html,
     body {
       margin: 0;
-      padding: 10px;
+      padding: 0;
+      overflow: hidden;
     }
 
-    canvas {
-      outline: 1px solid black;
-    }
   </style>
 </head>
 
@@ -31,12 +29,12 @@
   <script src="../dist/verly.bundle.js"></script>
 
   <script>
-    
+
     window.onload = function () {
       let canvas = document.getElementById('c');
       let ctx = canvas.getContext('2d');
-      let width = 600;
-      let height = 500;
+      let width = window.innerWidth;
+      let height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
 
@@ -60,7 +58,7 @@
 
       verly.createRagdoll(100, 100, 100, 100);
       verly.addEntity(custom);
-      
+
       function animate() {
         ctx.clearRect(0, 0, width, height);
 

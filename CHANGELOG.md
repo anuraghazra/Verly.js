@@ -5,9 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.2.1 - 11-07-2019
+
+### Added
+
+- better landing page
+- improved examples
+
+### Fixed
+
+- bug in clamp function
+
 ## v1.2.0 - 08-07-2019
 
 ### Added
+
 - Hidden Sticks with hidden parameter to Stick class
 - Setters API for easy use of Point and Stick constructors
 - Method chaining for Point and Stick

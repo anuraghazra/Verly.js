@@ -16,12 +16,10 @@
     html,
     body {
       margin: 0;
-      padding: 10px;
+      padding: 0;
+      overflow: hidden;
     }
 
-    canvas {
-      outline: 1px solid black;
-    }
   </style>
 </head>
 
@@ -36,8 +34,8 @@
     window.onload = function () {
       let canvas = document.getElementById('c');
       let ctx = canvas.getContext('2d');
-      let width = 600;
-      let height = 500;
+      let width = window.innerWidth;
+      let height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
       

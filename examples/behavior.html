@@ -16,12 +16,10 @@
     html,
     body {
       margin: 0;
-      padding: 10px;
+      padding: 0;
+      overflow: hidden;
     }
 
-    canvas {
-      outline: 1px solid black;
-    }
   </style>
 </head>
 
@@ -34,10 +32,13 @@
     window.onload = function () {
       let canvas = document.getElementById('c');
       let ctx = canvas.getContext('2d');
-      let width = 600;
-      let height = 500;
+      let width = window.innerWidth;
+      let height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
+      
+      let PARTICLE_COUNT = 700;
+      if (width < 400) PARTICLE_COUNT = 400;
 
       let verly = new Verly(16, canvas, ctx);
 
@@ -58,7 +59,7 @@
         particles.addPoint(x, y).setRadius(3).setGravity(new Vector(0, 0));
       }
 
-      for (let i = 0; i < 700; i++) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
         addParticles(random(width), random(height));
       }
 

@@ -6,8 +6,8 @@
 window.onload = function () {
   let canvas = document.getElementById('c');
   let ctx = canvas.getContext('2d');
-  let width = 1200;
-  let height = 500;
+  let width = clamp(window.innerWidth, 1200, Infinity);
+  let height = window.innerHeight;
   canvas.width = width;
   canvas.height = height;
   let verly = new Verly(50, canvas, ctx);

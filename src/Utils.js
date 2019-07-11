@@ -19,7 +19,7 @@ window.degreesToRad = function (degrees) {
  * @param {number} max
  */
 window.clamp = function (value, min, max) {
-  return Math.min(Math.max(value, Math.min(min, max), Math.max(min, max)))
+  return Math.max(min, Math.min(value, max));
 }
 /**
  * @method random
