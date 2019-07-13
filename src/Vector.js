@@ -21,7 +21,7 @@ class Vector {
   static dist(v1, v2) {
     return v1.dist(v2);
   }
-  
+
   /**
    * get distance squared from two vectors 
    * @param {Vector} v1 
@@ -69,8 +69,8 @@ class Vector {
    */
   static random2D() {
     return Vector.fromAngle(Math.random() * Math.PI * 180);
-  } 
-  
+  }
+
   /**
    * adds random jitter motion
    * @param {number} a 
@@ -160,6 +160,39 @@ class Vector {
     this.y = Math.sin(angle) * len;
   }
 
+  /**
+   * get the angle thia and given vector
+   * @param {Vector} v 
+   * @returns {number}
+   */
+  angle(v) {
+    return Math.atan2(this.x * v.y - this.y * v.x, this.x * v.x + this.y * v.y);
+  }
+
+  /**
+   * @param {Vector} vLeft 
+   * @param {Vector} vRight
+   * @returns {Vector} 
+   */
+  angle2(vLeft, vRight) {
+    return Vector.sub(vLeft, this).angle(Vector.sub(vRight, this));
+  }
+
+  /**
+   * rotate this vector by some origin and angle
+   * @param {Vector} origin 
+   * @param {theta} theta 
+   * @returns {Vector}
+   */
+  rotateBy(origin, theta) {
+    var x = this.x - origin.x;
+    var y = this.y - origin.y;
+    return new Vector(
+      x * Math.cos(theta) - y * Math.sin(theta) + origin.x,
+      x * Math.sin(theta) + y * Math.cos(theta) + origin.y
+    );
+  }
+
 
   /**
    * get the magnitude of this vector
@@ -199,7 +232,7 @@ class Vector {
     this.mult(value);
     return this;
   }
-  
+
   /**
    * normalize this vector 
    * @return {Vector}
@@ -246,7 +279,7 @@ class Vector {
   heading() {
     return (-Math.atan2(-this.y, this.x));
   }
-  
+
   /**
    * get distance between this and specific vector
    * @param {Vector} v 
@@ -276,7 +309,7 @@ class Vector {
   copy() {
     return new Vector(this.x, this.y);
   }
-  
+
   /**
    * revert this vector
    * @return {Vector}
@@ -286,7 +319,7 @@ class Vector {
     this.y = -this.y;
     return this;
   }
-  
+
   /**
    * return an array representation of this vector
    * @return {Array}
@@ -294,7 +327,7 @@ class Vector {
   array() {
     return [this.x, this.y];
   }
-  
+
   /**
    * return a string representation of this vector
    * @return {String}
@@ -302,7 +335,7 @@ class Vector {
   toString() {
     return "[" + this.x + ", " + this.y + ", " + this.z + "]";
   }
-  
+
   /**
    * 
    * @param {Vector} v 
@@ -314,7 +347,7 @@ class Vector {
     this.y = coeff * v.y;
     return this;
   }
-  
+
   /**
    * rotate this vector
    * @param {number} a 

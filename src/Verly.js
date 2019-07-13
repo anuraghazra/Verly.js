@@ -2,7 +2,7 @@ import Mouse from './Mouse';
 
 /**
  * @class Verly
- * @version 1.2.1
+ * @version 1.3.0
  * @author <hazru.anurag@gmail.com>
  */
 class Verly {
@@ -23,6 +23,36 @@ class Verly {
     this.mouse = new Mouse(this.entities, this.canvas, this.ctx);
   }
 
+  /**
+   * sets the canvas DPI for better rendering quality
+   */
+  setDPI() {
+    // Set up CSS size.
+    this.canvas.style.width = this.canvas.style.width || this.canvas.width + 'px';
+    this.canvas.style.height = this.canvas.style.height || this.canvas.height + 'px';
+
+    // Get size information.
+    var scaleFactor = window.devicePixelRatio / 1;
+    var width = parseFloat(this.canvas.style.width);
+    var height = parseFloat(this.canvas.style.height);
+
+    // Backup the this.canvas contents.
+    var oldScale = this.canvas.width / width;
+    var backupScale = scaleFactor / oldScale;
+    var backup = this.canvas.cloneNode(false);
+    backup.getContext('2d').drawImage(this.canvas, 0, 0);
+
+    // Resize the this.canvas.
+    this.canvas.width = Math.ceil(width * scaleFactor);
+    this.canvas.height = Math.ceil(height * scaleFactor);
+
+    // Redraw the this.canvas image and scale future draws.
+    this.ctx.setTransform(backupScale, 0, 0, backupScale, 0, 0);
+    this.ctx.drawImage(backup, 0, 0);
+    this.ctx.setTransform(scaleFactor, 0, 0, scaleFactor, 0, 0);
+  }
+
+  
   /**
    * @param  {...Entity} args
    * @description Joins two Entity Class Together 

@@ -9,7 +9,8 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
-    "jsdoc": "jsdoc -c jsdoc.conf.json"
+    "jsdoc": "jsdoc -c jsdoc.conf.json",
+    "test": "mocha --require esm -w --recursive"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,10 @@
   "dependencies": {},
   "devDependencies": {
     "better-docs": "^1.1.6",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
     "jsdoc": "^3.6.2",
+    "mocha": "^6.1.4",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"
   }

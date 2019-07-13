@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: TypoGraphy</title>
+    <title>JSDoc: AngleStick.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -49,297 +51,72 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Class</p>
-                        <h1>TypoGraphy</h1>
+                        <p>Source</p>
+                        <h1>AngleStick.js</h1>
                     </header>
                     
                     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TypoGraphy<span class="signature">(x, y, size, letter, verlyInstance)</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <h3 class="title"><span>Constructor</span></h3>
-                <div class="members">
-                    <div class="member">
-
-    
-    <h4 class="name" id="TypoGraphy">
-        
-        <span class="code-name">
-            new TypoGraphy<span class="signature">(x, y, size, letter, verlyInstance)</span><span class="type-signature"></span>
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class AngleStick {
+  /**
+   * 
+   * @param {Point} a 
+   * @param {Point} b 
+   * @param {Point} c 
+   * @param {number} stiffness 
+   */
+  constructor(a, b, c, stiffness) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.angle = this.b.pos.angle2(this.a.pos, this.c.pos);
+    this.stiffness = stiffness;
+  }
   
-      <td class="name"><code>x</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">number</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>y</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">number</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>size</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">number</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>letter</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">string</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>verlyInstance</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type"><a href="Verly.html">Verly</a></span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="TypoGraphy.js.html" class="button">View Source</a>
-            <span>
-                <a href="TypoGraphy.js.html">TypoGraphy.js</a>, <a href="TypoGraphy.js.html#line10">line 10</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-                </div>
-            </div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+  /**
+   * 
+   */
+  update() {
+    var angle = this.b.pos.angle2(this.a.pos, this.c.pos);
+    // get the angle difference
+    var diff = angle - this.angle;
+    if (diff &lt;= -Math.PI)
+      diff += 2 * Math.PI;
+    else if (diff >= Math.PI)
+      diff -= 2 * Math.PI;
+    diff *= 0.1 * this.stiffness;
+
+    this.a.pos = this.a.pos.rotateBy(this.b.pos, diff);
+    this.c.pos = this.c.pos.rotateBy(this.b.pos, -diff);
+    this.b.pos = this.b.pos.rotateBy(this.a.pos, diff);
+    this.b.pos = this.b.pos.rotateBy(this.c.pos, -diff);
+  }
+
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} ctx 
+   */
+  render(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(this.a.pos.x, this.a.pos.y);
+    ctx.lineTo(this.b.pos.x, this.b.pos.y);
+    ctx.lineTo(this.c.pos.x, this.c.pos.y);
+    var tmp = ctx.lineWidth;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+    ctx.stroke();
+    ctx.lineWidth = tmp;
+  }
+}
+
+export default AngleStick;</code></pre>
+        </article>
+    </section>
 
 
 
@@ -351,7 +128,7 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Sat Jul 13 2019 16:49:15 GMT+0530 (India Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Sat Jul 13 2019 16:49:14 GMT+0530 (India Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

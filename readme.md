@@ -36,15 +36,12 @@ after cloning the repo in command line run to build
 npm install && npm run build
 ```
 
-
-
-
 # Usage
 
 ## import CDN link
 ```html
 <!-- add this to head -->
-<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.2.0/dist/verly.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.2.1/dist/verly.bundle.js"></script>
 ```
 
 ```js

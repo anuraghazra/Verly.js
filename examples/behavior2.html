@@ -19,19 +19,15 @@
       padding: 0;
       overflow: hidden;
     }
-
   </style>
 </head>
 
 <body>
 
   <canvas id="c"></canvas>
-
   <script src="../dist/verly.bundle.js"></script>
 
-
   <script>
-
     window.onload = function () {
       let canvas = document.getElementById('c');
       let ctx = canvas.getContext('2d');
@@ -44,8 +40,8 @@
       let verly = new Verly(16, canvas, ctx);
 
       let particle = new Entity(16, verly);
-      let p1 = particle.addPoint(0, 0).setRadius(20);
-      let p2 = particle.addPoint(0, 0).setRadius(20);
+      let p1 = particle.addPoint(0, 0).setRadius(10);
+      let p2 = particle.addPoint(0, 0).setRadius(10);
 
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         particle.addPoint(random(width), random(height)).setRadius(4);
@@ -62,10 +58,11 @@
           particle.points[i].resolveBehaviors(particle.points[0], 100, 5);
           particle.points[i].resolveBehaviors(particle.points[1], width / 2, -0.8);
           particle.points[i].resolveBehaviors(particle.points[1], 100, 5);
+
           for (let j = 0; j < particle.points.length; j++) {
-            if (i !== 0 || i !== 1) {
-              particle.points[i].resolveBehaviors(particle.points[j], p1.radius, 3);
-            }
+            // if (i !== 0 || i !== 1) {
+            particle.points[i].resolveBehaviors(particle.points[j], p1.radius, 3);
+            // }
           }
         }
         verly.update();
@@ -74,7 +71,8 @@
 
 
         p1.addMotor(200, 200, verly.currentFrame, 100, 0.07);
-        p2.addMotor(350, 350, verly.currentFrame, 100, -0.07);
+        p2.pos.setXY(verly.mouse.coord.x || 200, verly.mouse.coord.y || 200);
+
 
         requestAnimationFrame(animate);
       }

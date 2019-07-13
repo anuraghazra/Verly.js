@@ -1,30 +1,23 @@
 /**
  * @method normalizedRandom
  */
-window.normalizedRandom = function () {
+export const normalizedRandom = function () {
   return Math.random() * 2 - 1;
 };
-/**
- * @method degreesToRad
- * @param {number} degrees
- */
-window.degreesToRad = function (degrees) {
-  var pi = Math.PI;
-  return degrees * (pi / 180);
-}
+
 /**
  * @method clamp
  * @param {number} value
  * @param {number} min
  * @param {number} max
  */
-window.clamp = function (value, min, max) {
+export const clamp = function (value, min, max) {
   return Math.max(min, Math.min(value, max));
 }
 /**
  * @method random
  */
-window.random = function (rand, min, max) {
+export const random = function (rand, min, max) {
   //one param
   if (arguments.length === 1) {
     return Math.random() * arguments[0];
@@ -49,6 +42,24 @@ window.random = function (rand, min, max) {
  * @param {number} b
  * @param {number} p
  */
-window.lerp = function (a, b, p) {
+export const lerp = function (a, b, p) {
   return (b - a) * p + a;
+}
+
+/**
+ * Convert from degrees to radians.
+ * @method radians
+ * @param {number} degrees
+ */
+export const radians = function(degrees) {
+  return degrees * Math.PI / 180;
+}
+
+/**
+ * Convert from radians to degrees.
+ * @method degrees
+ * @param {number} radians
+ */
+export const degrees = function(radians) {
+	return radians * 180 / Math.PI;
 }

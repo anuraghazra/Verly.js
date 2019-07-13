@@ -104,8 +104,8 @@ class Entity {
 
   /**
    * adds a stick inbetween two points
-   * @param {number|Stick} p1 
-   * @param {number=} p2 
+   * @param {number|Point} p1 
+   * @param {number|Point=} p2 
    * @param {number=} length 
    * @param {number=} stiffness 
    * @param {boolean=} ishidden 
@@ -122,6 +122,26 @@ class Entity {
   }
 
   /**
+   * adds a AngleStick in between 3 points
+   * @param {Point} p1
+   * @param {Point} p2
+   * @param {Point} p3
+   * @param {number} stiffness
+   * @returns {AngleStick}
+   */
+  addAngleStick(p1, p2, p3, stiffness) {
+    let stick;
+    if (p1 instanceof AngleStick) {
+      stick = p1;
+    } else {
+      stick = new AngleStick(this.points[p1], this.points[p2], this.points[p3], stiffness);
+    }
+    this.sticks.push(stick);
+    return stick;
+  }
+
+  /**
+   * 
    */
   updatePoints() {
     for (let i = 0; i < this.points.length; i++) {
