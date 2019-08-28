@@ -9,6 +9,7 @@ window.onload = function () {
     { title: 'Typography', src: './examples/typography/index.html' },
     { title: 'Custom Entity', src: './examples/joinEntities.html' },
     { title: 'Ship', src: './examples/ship/index.html' },
+    
   ];
 
 
