@@ -1,4 +1,4 @@
-import Mouse from './Mouse';
+import Mouse from "./Mouse";
 
 /**
  * @class Verly
@@ -7,10 +7,10 @@ import Mouse from './Mouse';
  */
 class Verly {
   /**
-   * 
-   * @param {Number} iterations 
-   * @param {HTMLCanvasElement} canvas 
-   * @param {CanvasRenderingContext2D} ctx 
+   *
+   * @param {Number} iterations
+   * @param {HTMLCanvasElement} canvas
+   * @param {CanvasRenderingContext2D} ctx
    */
   constructor(iterations, canvas, ctx) {
     this.entities = [];
@@ -28,8 +28,10 @@ class Verly {
    */
   setDPI() {
     // Set up CSS size.
-    this.canvas.style.width = this.canvas.style.width || this.canvas.width + 'px';
-    this.canvas.style.height = this.canvas.style.height || this.canvas.height + 'px';
+    this.canvas.style.width =
+      this.canvas.style.width || this.canvas.width + "px";
+    this.canvas.style.height =
+      this.canvas.style.height || this.canvas.height + "px";
 
     // Get size information.
     var scaleFactor = window.devicePixelRatio / 1;
@@ -40,7 +42,7 @@ class Verly {
     var oldScale = this.canvas.width / width;
     var backupScale = scaleFactor / oldScale;
     var backup = this.canvas.cloneNode(false);
-    backup.getContext('2d').drawImage(this.canvas, 0, 0);
+    backup.getContext("2d").drawImage(this.canvas, 0, 0);
 
     // Resize the this.canvas.
     this.canvas.width = Math.ceil(width * scaleFactor);
@@ -52,37 +54,36 @@ class Verly {
     this.ctx.setTransform(scaleFactor, 0, 0, scaleFactor, 0, 0);
   }
 
-  
   /**
    * @param  {...Entity} args
-   * @description Joins two Entity Class Together 
-   * 
+   * @description Joins two Entity Class Together
+   *
    * @example
    * let canvas = document.getElementById('c');
    * let ctx = canvas.getContext('2d');
    * let width = canvas.width = 600;
    * let height = canvas.height = 500;
-   * 
+   *
    * let verly = new Verly(16, canvas, ctx);
    * let box = verly.createBox(100, 100, 100, 100);
    * let rope = verly.createRope(100, 100, 15, 10, 0);
-   * 
+   *
    * // verly.joinEntities(...Entity)
    * let mix = verly.joinEntities(box, rope);
    * mix.addStick(0, 18, 20)
-   * 
+   *
    * function animate() {
    *  ctx.clearRect(0, 0, width, height);
-   * 
+   *
    *  verly.update();
    *  verly.render();
    *  verly.interact();
    *  verly.renderPointIndex();
-   * 
+   *
    *  requestAnimationFrame(animate);
    * }
    * animate();
-   * 
+   *
    */
   joinEntities(...args) {
     let mixEntity = new Entity(this.iterations, this);
@@ -114,9 +115,10 @@ class Verly {
   }
 
   /**
-   * @param {Entity} e 
+   * @param {Entity} e
    */
   addEntity(e) {
+    e.setupAccessibility();
     this.entities.push(e);
   }
 
@@ -155,17 +157,14 @@ class Verly {
     }
   }
 
-
-
-
   /**
-   * @param {number} x 
-   * @param {number} y 
-   * @param {number} w 
-   * @param {number} h 
+   * @param {number} x
+   * @param {number} y
+   * @param {number} w
+   * @param {number} h
    */
   createBox(x, y, w, h) {
-    const box = new Entity(this.iterations, this);
+    const box = new Entity(this.iterations, this, "Box");
     box.addPoint(x, y, 0, 0);
     box.addPoint(x + w, y, 0, 0);
     box.addPoint(x + w, y + h, 0, 0);
@@ -175,22 +174,20 @@ class Verly {
     box.addStick(2, 3);
     box.addStick(3, 0);
     box.addStick(3, 1);
-
     this.addEntity(box);
     return box;
   }
 
-
   /**
-   * @param {number} x 
-   * @param {number} y 
-   * @param {number} segments 
+   * @param {number} x
+   * @param {number} y
+   * @param {number} segments
    * @param {number} radius=50
    * @param {number} stride1=1
    * @param {number} stride2=5
    */
   createHexagon(x, y, segments, radius = 50, stride1 = 1, stride2 = 5) {
-    const hexagon = new Entity(this.iterations, this);
+    const hexagon = new Entity(this.iterations, this, "Hexagon");
 
     let stride = (2 * Math.PI) / segments;
 
@@ -200,7 +197,8 @@ class Verly {
       hexagon.addPoint(
         x + Math.cos(theta) * radius,
         y + Math.sin(theta) * radius,
-        0, 0
+        0,
+        0
       );
     }
 
@@ -213,21 +211,20 @@ class Verly {
       hexagon.addStick(i, (i + stride2) % segments);
     }
 
-
     this.addEntity(hexagon);
     return hexagon;
   }
 
   /**
-   * @param {number} posx 
-   * @param {number} posy 
-   * @param {number} w 
-   * @param {number} h 
-   * @param {number} segments 
-   * @param {number} pinOffset 
+   * @param {number} posx
+   * @param {number} posy
+   * @param {number} w
+   * @param {number} h
+   * @param {number} segments
+   * @param {number} pinOffset
    */
   createCloth(posx, posy, w, h, segments, pinOffset) {
-    let cloth = new Entity(this.iterations, this);
+    let cloth = new Entity(this.iterations, this, "Cloth");
 
     let xStride = w / segments;
     let yStride = h / segments;
@@ -253,8 +250,11 @@ class Verly {
     function tear(threshold) {
       for (let i = 0; i < cloth.sticks.length; i++) {
         // find the distance between two points
-        let dist = cloth.sticks[i].startPoint.pos.dist(cloth.sticks[i].endPoint.pos)
-        if (dist > (threshold || 20)) { // remove if the dist is > than threshold 
+        let dist = cloth.sticks[i].startPoint.pos.dist(
+          cloth.sticks[i].endPoint.pos
+        );
+        if (dist > (threshold || 20)) {
+          // remove if the dist is > than threshold
           cloth.removeSticks(cloth.sticks[i].startPoint);
         }
       }
@@ -263,7 +263,8 @@ class Verly {
     cloth.tear = tear;
 
     for (x = 0; x < segments; ++x) {
-      if (x % pinOffset == 0) { // magic
+      if (x % pinOffset == 0) {
+        // magic
         cloth.pin(x);
       }
     }
@@ -272,19 +273,18 @@ class Verly {
     return cloth;
   }
 
-
   /**
-   * @param {number} x 
-   * @param {number} y 
+   * @param {number} x
+   * @param {number} y
    * @param {number} segments=10
    * @param {number} gap=15
    * @param {number} pin=0
    */
   createRope(x, y, segments = 10, gap = 15, pin) {
-    let rope = new Entity(this.iterations, this);
+    let rope = new Entity(this.iterations, this, 'Rope');
 
     for (let i = 0; i < segments; i++) {
-      rope.addPoint(x + i * gap, y, 0, 0)
+      rope.addPoint(x + i * gap, y, 0, 0);
     }
 
     for (let i = 0; i < segments - 1; i++) {
@@ -298,9 +298,8 @@ class Verly {
     return rope;
   }
 
-
   createRagdoll(x0, y0) {
-    let ragdoll = new Entity(this.iterations, this);
+    let ragdoll = new Entity(this.iterations, this, 'Ragdoll');
 
     // Head
     ragdoll.addPoint(x0, y0).setRadius(15).setMass(5);
@@ -317,8 +316,14 @@ class Verly {
     ragdoll.addPoint(x0 - 20, y0 + 150);
 
     // Feet
-    ragdoll.addPoint(x0 + 30, y0 + 190).setRadius(10).setMass(20);
-    ragdoll.addPoint(x0 - 30, y0 + 190).setRadius(10).setMass(20);
+    ragdoll
+      .addPoint(x0 + 30, y0 + 190)
+      .setRadius(10)
+      .setMass(20);
+    ragdoll
+      .addPoint(x0 - 30, y0 + 190)
+      .setRadius(10)
+      .setMass(20);
 
     // Neck
     ragdoll.addPoint(x0, y0 + 25);
@@ -328,10 +333,14 @@ class Verly {
     ragdoll.addPoint(x0 - 25, y0 + 30);
 
     // Hands
-    ragdoll.addPoint(x0 + 15, y0 + 105).setRadius(10).setMass(5);
-    ragdoll.addPoint(x0 - 15, y0 + 105).setRadius(10).setMass(5);
-
-
+    ragdoll
+      .addPoint(x0 + 15, y0 + 105)
+      .setRadius(10)
+      .setMass(5);
+    ragdoll
+      .addPoint(x0 - 15, y0 + 105)
+      .setRadius(10)
+      .setMass(5);
 
     // "Muscles"
     // Head - shoulders

@@ -21,6 +21,7 @@ class Point {
     this.sticks = [];
     // this.behaviors = [];
     this.forceAcc = 1;
+    this.uid = ''
   }
 
   /**

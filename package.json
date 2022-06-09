@@ -27,7 +27,9 @@
     "url": "https://github.com/anuraghazra/Verly.js/issues"
   },
   "homepage": "https://github.com/anuraghazra/Verly.js#readme",
-  "dependencies": {},
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "better-docs": "^1.1.6",
     "chai": "^4.2.0",
