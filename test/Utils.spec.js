@@ -9,7 +9,7 @@ import {
   clamp,
   normalizedRandom,
   lerp
-} from '../src/Utils';
+} from '../src/Utils.js';
 
 describe('Utils', function () {
   describe('random()', function () {
