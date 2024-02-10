@@ -118,7 +118,6 @@ class Verly {
    * @param {Entity} e
    */
   addEntity(e) {
-    e.setupAccessibility();
     this.entities.push(e);
   }
 
