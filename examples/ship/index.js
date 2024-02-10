@@ -1,3 +1,5 @@
+import Ship from './Ship.js'
+
 
 window.onload = function () {
   let canvas = document.getElementById('c');

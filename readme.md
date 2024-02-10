@@ -31,17 +31,19 @@ git clone https://github.com/anuraghazra/Verly.js.git
 
 ## local development
 
-after cloning the repo in command line run to build
 ```bash
-npm install && npm run build
+npm install
+npx serve .
+open http://localhost:3000/
 ```
+
 
 # Usage
 
 ## import CDN link
 ```html
 <!-- add this to head -->
-<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.4.0/dist/verly.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js/src/app.js"></script>
 ```
 
 ```js
