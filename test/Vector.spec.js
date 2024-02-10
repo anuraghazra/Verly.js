@@ -2,7 +2,7 @@ import { should } from 'chai';
 import { expect } from 'chai';
 should();
 
-import Vector from '../src/Vector';
+import Vector from '../src/Vector.js';
 
 describe('Vector', function () {
   describe('Vector()', function () {
