@@ -1,5 +1,11 @@
 class AngleStick {
   /**
+   * given 3 vertices, maintains the angle at b with the given stiffness:
+   *  
+   *   a ●   ● c     
+   *      \ /  
+   *       ●
+   *       b
    * 
    * @param {Point} a 
    * @param {Point} b 
