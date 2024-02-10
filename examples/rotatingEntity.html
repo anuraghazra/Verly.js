@@ -27,9 +27,9 @@
 
   <canvas id="c"></canvas>
 
-  <script src="../dist/verly.bundle.js"></script>
-  <script src="../src/Objects.js"></script>
-  <script>
+  <script type="module" src="../src/app.js"></script>
+  <script type="module">
+    import { Box } from "../src/Objects.js"
 
     window.onload = function () {
       let canvas = document.getElementById('c');
@@ -45,7 +45,7 @@
       b1.setGravity(new Vector())
       verly.addEntity(b1);
 
-      for (p of b1.points) {
+      for (const p of b1.points) {
         let absSize = new Vector(b1.width / 2, b1.height / 2);
         let boxcenter = new Vector(b1.x - absSize.x, b1.y - absSize.y);
         let rot = radians(25);
@@ -57,7 +57,7 @@
       b2.setGravity(new Vector())
       verly.addEntity(b2);
 
-      for (p of b2.points) {
+      for (const p of b2.points) {
         let absSize = new Vector(b2.width / 2, b2.height / 2);
         let boxcenter = new Vector(b2.x - absSize.x, b2.y - absSize.y);
         let rot = radians(-25);

@@ -82,3 +82,6 @@ class Ship extends Point {
     this.heading += this.rotation;
   };
 }
+
+export default Ship
+

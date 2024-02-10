@@ -1,4 +1,7 @@
-class Box extends Entity {
+import Entity from './Entity.js'
+
+
+export class Box extends Entity {
   constructor(x, y, width, height, interation, verlyInstance) {
     super(interation, verlyInstance);
     this.x = x;

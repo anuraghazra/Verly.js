@@ -1,3 +1,4 @@
+
 class Text {
   constructor(alphabets, x, y, fontsize, verlyInstance) {
     this.alphabets = alphabets.toUpperCase().split('');
@@ -40,3 +41,6 @@ class Text {
     return this; // return for chaining
   }
 }
+
+
+export default Text;

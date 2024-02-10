@@ -1,3 +1,6 @@
+import Verly from '../../src/Verly.js';
+
+
 class VerlyCanvas extends HTMLCanvasElement {
   constructor() {
     super();

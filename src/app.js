@@ -5,15 +5,15 @@ import {
   clamp,
   normalizedRandom,
   lerp
-} from './Utils';
+} from './Utils.js';
 
-import Verly from './Verly';
-import Vector from './Vector';
-import Point from './Point';
-import Stick from './Stick';
-import AngleStick from './AngleStick';
-import Entity from './Entity';
-import TypoGraphy from './TypoGraphy';
+import Verly from './Verly.js';
+import Vector from './Vector.js';
+import Point from './Point.js';
+import Stick from './Stick.js';
+import AngleStick from './AngleStick.js';
+import Entity from './Entity.js';
+import TypoGraphy from './TypoGraphy.js';
 
 window.Verly = Verly;
 window.Vector = Vector;
